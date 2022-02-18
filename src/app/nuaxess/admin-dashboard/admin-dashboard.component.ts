@@ -21,6 +21,7 @@ import { DataService } from 'app/data.service';
     isScreenSmall: boolean;
     term: any;
     p: any;
+    q: any;
 
       chartGithubIssues: ApexOptions = {};
       chartTaskDistribution: ApexOptions = {};

@@ -126,7 +126,7 @@
                                     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 w-full min-w-0">
                                         <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
                                             <div class="flex items-start justify-between">
-                                                <div [routerLink]="['/company-list']" class="text-lg font-medium tracking-tight leading-6 truncate">Prospects</div>
+                                                <div [routerLink]="['/company-list']" class="text-lg font-medium tracking-tight leading-6 truncate">Active Clients</div>
                                                 <div class="ml-2 -mt-2 -mr-3">
                                                     <button
                                                         mat-icon-button
@@ -151,8 +151,8 @@
                                                 </div>
                                             </div>
                                             <div class="flex flex-col items-center mt-2">                                                
-                                                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">{{ data.prospect_count }}</div>
-                                                <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Prospects</div>
+                                                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-blue-500">{{ data.active_count }}</div>
+                                                <div class="text-lg font-medium text-blue-600 dark:text-blue-500">Active</div>
                                             </div>
                                         </div>
                                         <!-- Overdue -->
@@ -188,7 +188,7 @@
                                         <!-- Issues -->
                                         <div class="flex flex-col flex-auto p-6 bg-card shadow rounded-2xl overflow-hidden">
                                             <div class="flex items-start justify-between">
-                                                <div class="text-lg font-medium tracking-tight leading-6 truncate">User Accounts</div>
+                                                <div class="text-lg font-medium tracking-tight leading-6 truncate">Prospects </div>
                                                 <div class="ml-2 -mt-2 -mr-3">
                                                     <button
                                                         mat-icon-button
@@ -198,7 +198,7 @@
                                                             [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
                                                     </button>
                                                     <mat-menu #issuesMenu="matMenu">
-                                                        <button [routerLink]="['/user-list/active']" mat-menu-item>Active</button>
+                                                        <button [routerLink]="['/user-list/active']" mat-menu-item>Prospects</button>
                                                         <button [routerLink]="['/quote-list/pending']" mat-menu-item>Pending Enrollment</button>
                                                         <button [routerLink]="['/quote-list/reset']" mat-menu-item>In Password Reset</button>
                                                         <button [routerLink]="['/quote-list/locked']" mat-menu-item>Locked</button>
@@ -206,8 +206,8 @@
                                                 </div>
                                             </div>
                                             <div class="flex flex-col items-center mt-2">
-                                                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">{{ data.user_count }}</div>
-                                                <div class="text-lg font-medium text-amber-600 dark:text-amber-500">User Accounts</div>
+                                                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-amber-500">{{ data.prospect_count }}</div>
+                                                <div class="text-lg font-medium text-amber-600 dark:text-amber-500">Prospects</div>
                                             </div>
                                         </div>
                                         <!-- Features -->
@@ -229,7 +229,7 @@
                                                 </div>
                                             </div>
                                             <div class="flex flex-col items-center mt-2"> 
-                                                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-green-500">{{ data.enrolled_members }}</div>
+                                                <div class="text-7xl sm:text-8xl font-bold tracking-tight leading-none text-green-500">{{ data.enrolled_count }}</div>
                                                 <div class="text-lg font-medium text-green-600 dark:text-green-500">Members</div>
                                             </div>
                                         </div>
@@ -239,6 +239,122 @@
                         </mat-tab-group>
                     </div>
                     <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 style="font-size: 24px; font-weight: bold;">Quotes</h1>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <div class="col-lg-6 py-2">
+                                        Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
+                                    </div>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Quote Number</th>
+                                                <th>Company</th>
+                                                <th>Contact Name</th>
+                                                <th>Contact Phone</th>
+                                                <th>Email</th>
+                                                <th style="text-align: right;">Medical</th>
+                                                <th style="text-align: right;">Dental</th>
+                                                <th style="text-align: right;">Vision</th>
+                                                <th style="text-align: right;">Status</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let m of data.quotes | filter: term ">
+                                                <td>{{ m.id }}</td>
+                                                <td>{{ m.quote_id }}</td>
+                                                <td>{{ m.company_name }}</td>
+                                                <td>{{ m.contact_name }}</td>
+                                                <td>{{ m.contact_phone }}</td>
+                                                <td>{{ m.contact_email }}</td>
+                                                <td style="text-align: right;">{{ m.medical }}</td>
+                                                <td style="text-align: right;">{{ m.dental }}</td>
+                                                <td style="text-align: right;">{{ m.vision }}</td>
+                                                <td style="text-align: right;">{{ m.status }}</td>
+                                                <td><button [routerLink]="['/company-dashboard',m.company_id]" class="btn btn-primary">View</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 style="font-size: 24px; font-weight: bold;">Prospects <button [routerLink]="['/add-company',data.user['org_id']]" class="btn btn-primary"> Add Prospect </button></h1>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <div class="col-lg-6 py-2">
+                                        Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
+                                    </div>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Company</th>
+                                                <th style="text-align: right;">Contact Name</th>
+                                                <th style="text-align: right;">Contact Phone</th>
+                                                <th style="text-align: right;">Address</th>
+                                                <th style="text-align: right;">Quoted</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let m of data.prospects | filter: term ">
+                                                <td>{{ m.id }}</td>
+                                                <td>{{ m.company_name }}</td>
+                                                <td style="text-align: right;">{{ m.contact_name }}</td>
+                                                <td style="text-align: right;">{{ m.contact_phone }}</td>
+                                                <td style="text-align: right;">{{ m.address }}<br>{{ m.city }}, {{ m.state }} {{ m.zip }}</td>
+                                                <td style="text-align: right;">{{ m.quoted }}</td>
+                                                <td><button [routerLink]="['/company-dashboard',m.id]" class="btn btn-primary">View</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h1 style="font-size: 24px; font-weight: bold;">Pending/Enrolling Companies</h1>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="table-responsive">
+                                    <div class="col-lg-6 py-2">
+                                        Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
+                                    </div>
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Company</th>
+                                                <th style="text-align: right;">Contact Name</th>
+                                                <th style="text-align: right;">Contact Phone</th>
+                                                <th style="text-align: right;">Address</th>
+                                                <th style="text-align: right;">Quoted</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let m of data.pending | filter: term ">
+                                                <td>{{ m.id }}</td>
+                                                <td>{{ m.company_name }}</td>
+                                                <td style="text-align: right;">{{ m.contact_name }}</td>
+                                                <td style="text-align: right;">{{ m.contact_phone }}</td>
+                                                <td style="text-align: right;">{{ m.address }}<br>{{ m.city }}, {{ m.state }} {{ m.zip }}</td>
+                                                <td style="text-align: right;">{{ m.quoted }}</td>
+                                                <td><button [routerLink]="['/company-dashboard',m.id]" class="btn btn-primary">View</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <h1 style="font-size: 24px; font-weight: bold;">Active Companies</h1>
@@ -264,51 +380,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let m of data.active | filter: term | paginate: { currentPage: p , itemsPerPage: 25}">
-                                                <td>{{ m.id }}</td>
-                                                <td>{{ m.company_name }} {{ m.infinity_id }}</td>
-                                                <td style="text-align: right;">{{ m.medical_count }}</td>
-                                                <td style="text-align: right;">{{ m.dental_count }}</td>
-                                                <td style="text-align: right;">{{ m.vision_count }}</td>
-                                                <td style="text-align: right;">{{ m.add_count }}</td>
-                                                <td style="text-align: right;">{{ m.insured_employees }}</td>
-                                                <td style="text-align: right;">{{ m.insured_lives }}</td>
-                                                <td style="text-align: right;">${{ m.monthly_total }}</td>
-                                                <td><button [routerLink]="['/company-dashboard',m.id]" class="btn btn-primary">View</button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <paging-controls (pageChange)="p = $event" [isItemsPerPage]="false"  
-                                    class="my-pagination"></paging-controls> 
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1 style="font-size: 24px; font-weight: bold;">Pending/Enrolling Companies</h1>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <div class="col-lg-6 py-2">
-                                        Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
-                                    </div>
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Company</th>
-                                                <th style="text-align: right;">Medical</th>
-                                                <th style="text-align: right;">Dental</th>
-                                                <th style="text-align: right;">Vision</th>
-                                                <th style="text-align: right;">AD&D/Life</th>
-                                                <th style="text-align: right;">Insured Employees</th>
-                                                <th style="text-align: right;">Insured Lives</th>
-                                                <th style="text-align: right;">Monthly Total</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let m of data.pending | filter: term">
+                                            <tr *ngFor="let m of data.active | filter: term ">
                                                 <td>{{ m.id }}</td>
                                                 <td>{{ m.company_name }}</td>
                                                 <td style="text-align: right;">{{ m.medical_count }}</td>
@@ -325,6 +397,7 @@
                                 </div>
                             </div>
                         </div>
+ 
                     </div>
                 </div>
             

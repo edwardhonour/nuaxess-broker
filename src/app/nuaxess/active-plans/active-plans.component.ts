@@ -9,12 +9,13 @@ import { NavigationService } from 'app/core/navigation/navigation.service';
 import { DataService } from 'app/data.service';
 import { FormBuilder } from '@angular/forms';
 
+
 @Component({
-  selector: 'app-quote-request-dashboard',
-  templateUrl: './quote-request-dashboard.component.html',
-  styleUrls: ['./quote-request-dashboard.component.scss']
+  selector: 'app-active-plans',
+  templateUrl: './active-plans.component.html',
+  styleUrls: ['./active-plans.component.scss']
 })
-export class QuoteRequestDashboardComponent implements OnInit, OnDestroy {
+export class ActivePlansComponent implements OnInit, OnDestroy {
   navigation: Navigation;
   isScreenSmall: boolean;
   term: any;
@@ -27,10 +28,6 @@ export class QuoteRequestDashboardComponent implements OnInit, OnDestroy {
     currentYear: any;
     email: any;
     user: any;
-    adding: any;
-    mult: any;
-    editQ: any;
-    uploading: any;
 
     /**
      * Constructor
@@ -45,32 +42,22 @@ export class QuoteRequestDashboardComponent implements OnInit, OnDestroy {
       private _dataService: DataService,
       private _formBuilder: FormBuilder
   ) { }
-addEmployee() {
 
-}
-
-editQuote() {
-
-}
     ngOnInit(): void
     {      
-      this.editQ='N';
-this.adding='N';
-this.mult='N';
-this.uploading='N';
-this._activatedRoute.data.subscribe(({ 
-  data, menudata, userdata })=> { 
-    this.data=data;
-    if (this.data.user.force_logout>0) {
-      localStorage.removeItem('uid');
-      this._router.navigate(['/forced-off',this.data.user.force_logout]);
-  }
-    this.user=userdata;
-    this.navigation=menudata
-    console.log(data)
-}) 
-            
 
+      this._activatedRoute.data.subscribe(({ 
+        data, menudata, userdata })=> { 
+          this.data=data;
+          if (this.data.user.force_logout>0) {
+            localStorage.removeItem('uid');
+            this._router.navigate(['/forced-off',this.data.user.force_logout]);
+        }
+          this.user=userdata;
+          this.navigation=menudata
+          console.log(data)
+      }) 
+                      
             this._fuseMediaWatcherService.onMediaChange$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(({matchingAliases}) => {
@@ -135,87 +122,11 @@ this._activatedRoute.data.subscribe(({
         return this.formFieldHelpers.join(' ');
     }
 
-    submitQuote() {
-      if (confirm('Are you sure you want to submit this quote?')) {
-
-
-      this._dataService.postForm("post-submit-quote", this.data).subscribe((data:any)=>{
-        if (data.error_code=="0") {
-          location.reload()
-        } else {     
-//            this.error=data.error_message
-        }
-      });
-
-    }
-
-    }
-
-    fixCont() {
-
-    }
-    toggleMult() {
-        if (this.mult=='Y') {
-            this.mult='N'
-        } else {
-            this.mult='Y'
-        }
-    }
-
-    postCont(id: any) {
-      this.data.colForm['save_id']=id;
-      this._dataService.postForm("post-edit-quote-request", this.data).subscribe((data:any)=>{
-        if (data.error_code=="0") {
-            this.data=data.data.data;
-            console.log(this.data)
-//          this._router.navigate(['/org-dashboard',data.id])
-        } else {     
-//            this.error=data.error_message
-        }
-      });
-    }
-
-edit() {
-  if (this.editQ=='N') {
-     this.editQ='Y'
-  } else {
-     this.editQ='N'
-  }
-
-}
-
-make() {
-  this._dataService.postForm("post-make-plans", this.data['formData']).subscribe((data:any)=>{
-    if (data.error_code=="0") {
-//            this._router.navigate(['/org-dashboard',data.id])
-        location.reload()
-    } else {     
-//            this.error=data.error_message
-    }
-  });
-}
-
-submit() {
-  if (confirm('Are you sure you want to submit this quote request?')) {
-
-  this._dataService.postForm("submit-quote-request", this.data['formData']).subscribe((data:any)=>{
-    if (data.error_code=="0") {
-//            this._router.navigate(['/org-dashboard',data.id])
-        location.reload()
-    } else {     
-//            this.error=data.error_message
-    }
-  });
-
-      
-}
-}
-
+  
     postForm() {
-        this._dataService.postForm("post-edit-quote-background", this.data['formData']).subscribe((data:any)=>{
+        this._dataService.postForm("post-add-org", this.data).subscribe((data:any)=>{
           if (data.error_code=="0") {
-//            this._router.navigate(['/org-dashboard',data.id])
-              location.reload()
+            this._router.navigate(['/org-dashboard',data.id])
           } else {     
 //            this.error=data.error_message
           }

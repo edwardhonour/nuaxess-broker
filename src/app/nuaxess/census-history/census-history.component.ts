@@ -13,11 +13,11 @@ import { HttpClient } from '@angular/common/http';
 import { NgLocalization } from '@angular/common';
 
 @Component({
-  selector: 'app-company-dashboard',
-  templateUrl: './company-dashboard.component.html',
-  styleUrls: ['./company-dashboard.component.scss']
+  selector: 'app-census-history',
+  templateUrl: './census-history.component.html',
+  styleUrls: ['./census-history.component.scss']
 })
-export class CompanyDashboardComponent implements OnInit, OnDestroy {
+export class CensusHistoryComponent implements OnInit, OnDestroy {
   navigation: Navigation;
   isScreenSmall: boolean;
   term: any;
@@ -40,8 +40,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     uploading: any;
     dsc: any;
     doc_title: any;
-    inactive: any;
-    active: any;
+
     /**
      * Constructor
      */
@@ -63,8 +62,6 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       this.doc_title="";   
       this.editQQ='N';
       this.uploading='N';
-      this.inactive='N';
-      this.active='N';
       this._activatedRoute.data.subscribe(({ 
         data, menudata, userdata })=> { 
           this.data=data;
@@ -299,22 +296,6 @@ editQuote() {
     this.editQQ='Y'
   } else {
     this.editQQ='N'
-  }
-}
-
-showInactive() {
-if (this.inactive=='Y') {
-   this.inactive='N';
-} else {
-  this.inactive='Y'
-}
-}
-
-showActive() {
-  if (this.active=='Y') {
-     this.active='N';
-  } else {
-    this.active='Y'
   }
 }
 

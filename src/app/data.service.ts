@@ -14,7 +14,7 @@ export class DataService {
 
   constructor(private http: HttpClient) { 
 //      this.url='https://quadm.tech/data/';
-        this.url='https://myna-api.com/api/';
+        this.url='https://myna-api.com/api/broker.php';
     }
 
   getLocalStorage() {
@@ -87,7 +87,7 @@ export class DataService {
     }
 
 //  this.t= this.http.post("https://quadm.tech/data/k.php", data);
-  this.t= this.http.post("https://myna-api.com/api/k.php", data);
+  this.t= this.http.post("https://myna-api.com/api/broker-menu.php", data);
   return this.t;
 
   }
@@ -105,7 +105,6 @@ export class DataService {
   return this.t;
 
   }
-
   
   getEnroll(token: any) {
     this.getLocalStorage()

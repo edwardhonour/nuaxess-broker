@@ -762,49 +762,93 @@
             <thead>
                 <tr>
                     <th>
-                        ID
+                        Plan
                     </th>
                     <th>
-                        Name
+                        Eff Dt
                     </th>
                     <th>
-                        Coverage
+                        Term Dt
                     </th>
                     <th>
-                        Premium
+                        Coverage Level
                     </th>
                     <th>
-                        Contribution
+                        Price
                     </th>
-<!--                 <th>
+                    <th>
     
-                    </th> -->
+                    </th>
                 </tr>
             </thead>
             <tbody>
-    <tr *ngFor="let m of data.plans">
+    <tr *ngFor="let m of data.census">
         <td>
-            {{ m.plan_id }}
+            {{ m.client_plan }}
         </td>
         <td>
-            {{ m.plan_dsc }}
+            {{ m.eff_dt }}
         </td>
         <td>
-            {{ m.plan_type }}
+            {{ m.term_dt }}
         </td>
         <td>
-            {{ m.peo_premium }}
+            {{ m.coverage_level }}
         </td>
         <td>
-            {{ m.employee_contrib }}
+            {{ m.coverage_price }}
         </td>
-<!--    <th>
-            <button [routerLink]="['/active-plan-dashboard',m.id]" class="btn btn-primary">View/Edit</button>
-        </th> -->
+        <th>
+            <button *ngIf="m.term_dt==''" (click)="termEmployee(m.id, m.client_plan)" class="btn btn-danger">Terminate Plan</button>
+        </th> 
     </tr>
             </tbody>
         </table>
      </div>
+</div>
+<div *ngIf="showterm=='Y'" class="card card-body"  style="margin-top:20px;">
+    <div class="table-responsive">
+        <h2 class="h2" style="font-size: 24px;">Schedule Plan Termination</h2>
+        <form class="flex flex-col mt-8 p-8 pb-4 bg-card rounded-2xl shadow overflow-hidden">
+            <div class="flex flex-col gt-xs:flex-row">
+                <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="flex-auto gt-xs:pr-3">
+                    <mat-label>Plan</mat-label>
+                    <input matInput id="plan_id" name="plan_id" [(ngModel)]="data.termData['plan_id']">
+                    <mat-icon
+                        class="icon-size-5"
+                        matSuffix
+                        [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+                </mat-form-field>
+                <mat-form-field
+                [ngClass]="formFieldHelpers"
+                class="flex-auto gt-xs:pr-3">
+                <mat-label>Termination Effective Date</mat-label>
+                <mat-select  id="term_date" name="term_date" [(ngModel)]="data.termData['term_date']">
+                    <mat-option *ngFor="let m of data.termdts" value="{{ m }}">{{ m }}</mat-option>
+                </mat-select>
+                <mat-icon
+                    class="icon-size-5"
+                    matPrefix
+                    [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+            </mat-form-field>
+            </div>
+            <div class="flex flex-col gt-xs:flex-row">
+            </div>
+            <div class="flex items-center justify-end border-t -mx-8 mt-8 px-8 py-5 bg-gray-50 dark:bg-gray-700">
+                <button (click)="addFamily()" mat-button>
+                    Cancel
+                </button>
+                <button
+                    class="px-6 ml-3"
+                    mat-flat-button
+                    [color]="'primary'" (click)="postTerm()">
+                    Schedule Terminaton
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="card card-body"  style="margin-top:20px;">

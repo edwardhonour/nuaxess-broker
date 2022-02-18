@@ -26,6 +26,7 @@ export class EmployeeDashboardComponent implements OnInit, OnDestroy {
   navigation: Navigation;
   isScreenSmall: boolean;
   term: any;
+  showterm: any;
   p: any;
   formFieldHelpers: string[] = [''];
   adding: any;
@@ -109,6 +110,7 @@ export class EmployeeDashboardComponent implements OnInit, OnDestroy {
       this.dsc='';    
       this.doc_title='';        
       this.uploading='N';
+      this.showterm='N';
      //===================================================
     // END UPLOAD GRAB #4
     //===================================================
@@ -202,6 +204,31 @@ export class EmployeeDashboardComponent implements OnInit, OnDestroy {
   
     addEmployee () {
 
+    }
+
+    termEmployee(id: any, plan:any) {
+        if (this.showterm=="N") {
+          this.data['termData'].plan_id=plan;
+          this.data['termData'].id=id;
+          this.showterm="Y";
+        } else {
+          this.showterm="N";
+          this.data['termData'].plan_id="";
+          this.data['termData'].id="";
+        }
+    }
+
+    postTerm() {
+       if (confirm('Are you sure you want to terminate this plan?')) {
+        this._dataService.postForm("post-term-plan", this.data.termData).subscribe((data:any)=>{
+          if (data.error_code=="0") {
+            location.reload();
+  //            this._router.navigate(['/org-dashboard',data.id])
+          } else {     
+  //            this.error=data.error_message
+          }
+        });         
+       }
     }
 
     postAddFamily() {

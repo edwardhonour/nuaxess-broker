@@ -12,12 +12,13 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NgLocalization } from '@angular/common';
 
+
 @Component({
-  selector: 'app-company-dashboard',
-  templateUrl: './company-dashboard.component.html',
-  styleUrls: ['./company-dashboard.component.scss']
+  selector: 'app-census-dashboard',
+  templateUrl: './census-dashboard.component.html',
+  styleUrls: ['./census-dashboard.component.scss']
 })
-export class CompanyDashboardComponent implements OnInit, OnDestroy {
+export class CensusDashboardComponent implements OnInit, OnDestroy {
   navigation: Navigation;
   isScreenSmall: boolean;
   term: any;

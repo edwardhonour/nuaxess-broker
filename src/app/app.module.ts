@@ -104,6 +104,15 @@ import { InvoiceDashboardComponent } from './nuaxess/invoice-dashboard/invoice-d
 import { InvoiceListComponent } from './nuaxess/invoice-list/invoice-list.component';
 import { ApaPlanListComponent } from './nuaxess/apa-plan-list/apa-plan-list.component';
 import { ApaCompanyDashboardComponent } from './nuaxess/apa-company-dashboard/apa-company-dashboard.component';
+import { CensusHistoryComponent } from './nuaxess/census-history/census-history.component';
+import { BrokerHomeComponent } from './nuaxess/broker-home/broker-home.component';
+import { NuaxessHomeComponent } from './nuaxess/nuaxess-home/nuaxess-home.component';
+import { PeoCompanyListComponent } from './nuaxess/peo-company-list/peo-company-list.component';
+import { CurrentCensusComponent } from './nuaxess/current-census/current-census.component';
+import { CurrentTerminationsComponent } from './nuaxess/current-terminations/current-terminations.component';
+import { CurrentAdditionsComponent } from './nuaxess/current-additions/current-additions.component';
+import { ActivePlansComponent } from './nuaxess/active-plans/active-plans.component';
+import { CensusDashboardComponent } from './nuaxess/census-dashboard/census-dashboard.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -169,7 +178,16 @@ const routerConfig: ExtraOptions = {
         InvoiceDashboardComponent,
         InvoiceListComponent,
         ApaPlanListComponent,
-        ApaCompanyDashboardComponent
+        ApaCompanyDashboardComponent,
+        CensusHistoryComponent,
+        BrokerHomeComponent,
+        NuaxessHomeComponent,
+        PeoCompanyListComponent,
+        CurrentCensusComponent,
+        CurrentTerminationsComponent,
+        CurrentAdditionsComponent,
+        ActivePlansComponent,
+        CensusDashboardComponent
     ],
     imports     : [
         BrowserModule,

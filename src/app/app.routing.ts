@@ -55,6 +55,15 @@ import { InvoiceDashboardComponent } from './nuaxess/invoice-dashboard/invoice-d
 import { InvoiceListComponent } from './nuaxess/invoice-list/invoice-list.component';
 import { ApaPlanListComponent } from './nuaxess/apa-plan-list/apa-plan-list.component';
 import { ApaCompanyDashboardComponent } from './nuaxess/apa-company-dashboard/apa-company-dashboard.component';
+import { CensusHistoryComponent } from './nuaxess/census-history/census-history.component';
+import { BrokerHomeComponent } from './nuaxess/broker-home/broker-home.component';
+import { NuaxessHomeComponent } from './nuaxess/nuaxess-home/nuaxess-home.component';
+import { PeoCompanyListComponent } from './nuaxess/peo-company-list/peo-company-list.component';
+import { CurrentCensusComponent } from './nuaxess/current-census/current-census.component';
+import { CurrentTerminationsComponent } from './nuaxess/current-terminations/current-terminations.component';
+import { CurrentAdditionsComponent } from './nuaxess/current-additions/current-additions.component';
+import { ActivePlansComponent } from './nuaxess/active-plans/active-plans.component';
+import { CensusDashboardComponent } from './nuaxess/census-dashboard/census-dashboard.component';
 
 // @formatter:off
 /* eslint-disable max-len */
@@ -136,6 +145,7 @@ export const appRoutes: Route[] = [
             {path: 'company-list/:id', component: CompanyListComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'company-list', component: CompanyListComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'company-dashboard/:id', component: CompanyDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'census-history/:id/:id2', component: CensusHistoryComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'apa-company-dashboard/:id', component: ApaCompanyDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'apa-company-dashboard/:id/:id2', component: ApaCompanyDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'employee-dashboard/:id', component: EmployeeDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
@@ -161,13 +171,22 @@ export const appRoutes: Route[] = [
             {path: 'quote-request-list/:id/:id2', component: QuoteRequestListComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'quote-request-dashboard/:id', component: QuoteRequestDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'quote-request-dashboard/:id/:id2', component: QuoteRequestDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'census-dashboard/:id/:id2', component: CensusDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'edit-quote-request/:id', component: EditQuoteComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'employee-ihq/:id', component: EmployeeIHQComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'active-plan-dashboard/:id', component: ActivePlanDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'peo-company-list', component: PeoCompanyListComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },  
+            {path: 'current-census', component: CurrentCensusComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'current-terminations', component: CurrentTerminationsComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'current-census/:id', component: CurrentCensusComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'current-additions', component: CurrentAdditionsComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'active-plans', component: ActivePlansComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },          
             {path: 'member-lookup', component: MemberLookupComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'guardian-lookup', component: GuardianLookupComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'enroll/:id', component: UserEnrollComponent, resolve: { data: EnrollResolver }, },
             {path: 'invoice-list', component: InvoiceListComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'broker-home', component: BrokerHomeComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'nuaxess-home', component: NuaxessHomeComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'invoice-list/:id', component: InvoiceListComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'invoice-list/:id/:id2', component: InvoiceListComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'enroll', component: UserEnrollComponent, resolve: { data: EnrollResolver }, }

@@ -112,34 +112,27 @@
         <div class="col-xl-10">
                 <div class="row">
                     <div class="col-md-12 col-xl-4">
-                        <button mat-button [routerLink]="['/company-dashboard',data.formData.company_id]">Go Back</button>
-
-                        <div class="card card-body">            
+                        <button class="btn btn-primary" [routerLink]="['/company-dashboard',data.formData.company_id]">Go Back</button>
+                        <span *ngIf="(data.user.role=='sadmin'||data.user.role=='user')&&data.plans.length==0">
+                            <button style="margin-left:20px;" class="btn btn-primary" (click)="make()">Make Plans</button>
+                        </span>
+                        <span *ngIf="(data.user.role=='badmin'||data.user.role=='broker')&&data.quote['status']=='New'">
+                            <button style="margin-left:20px;" class="btn btn-danger" (click)="submit()">Submit Quote Request</button>
+                        </span>
+                        <span *ngIf="(data.user.role=='badmin'||data.user.role=='broker')&&data.quote['status']!='New'">
+                            Quote Submitted at {{ data.quote['date_sent'] }}
+                        </span>
+                        <span *ngIf="(data.user.role=='sadmin'||data.user.role=='user')&&data.plans.length>0">
+                            <button style="margin-left:20px;" class="btn btn-danger" (click)="edit()">Send Quote</button>
+                        </span>
+                        <div class="card card-body"> 
+                            <h2 style="font-size: 24px;"><b>Quote in Progress</b></h2>           
                         <div class="row">
                             <div class="table table-responsive">
                                 <thead>
                             
                                 </thead>
                                 <tbody>                                   
-                                    <tr>
-                                        <th>
-
-                                        </th>
-                                        <th>
-                                            <span *ngIf="(data.user.role=='sadmin'||data.user.role=='user')&&data.plans.length==0">
-                                                <button class="btn btn-primary" (click)="make()">Make Plans</button>
-                                            </span>
-                                            <span *ngIf="(data.user.role=='badmin'||data.user.role=='broker')&&data.quote['status']=='New'">
-                                                <button class="btn btn-danger" (click)="submit()">Submit Quote Request</button>
-                                            </span>
-                                            <span *ngIf="(data.user.role=='badmin'||data.user.role=='broker')&&data.quote['status']!='New'">
-                                                Quote Submitted at {{ data.quote['date_sent'] }}
-                                            </span>
-                                            <span *ngIf="(data.user.role=='sadmin'||data.user.role=='user')&&data.plans.length>0">
-                                                <button class="btn btn-danger" (click)="edit()">Send Quote</button>
-                                            </span>
-                                        </th>
-                                    </tr>
                                     <tr>
                                         <th>ID:</th>
                                         <td>{{ data['quote'].id }}
@@ -296,7 +289,7 @@
                     <div class="col-xl-5">
                         <div class="card card-body"> 
                         <div class="table-responsive">
-                            <h2 style="font-size: 24px;">Quoted Employees</h2>
+                            <h2 style="font-size: 24px;"><b>Quoted Employees</b></h2>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
@@ -307,7 +300,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let m of data.employees">
+                                    <tr *ngFor="let m of data.employees  | filter: term | paginate: { currentPage: p , itemsPerPage: 15}">
                                         <td>{{ m.last_name}}, {{ m.first_name }} {{ m.middle_name }}</td>
                                         <td>{{ m.gender }}</td>
                                         <td>{{ m.date_of_birth }}</td>
@@ -315,7 +308,82 @@
                                     </tr>
                                 </tbody>
                             </table>
+                            <paging-controls (pageChange)="p = $event" [isItemsPerPage]="false"  
+                            class="my-pagination"></paging-controls>
                         </div> 
+                        </div>
+                    </div>
+                    <div class="col-xl-3">
+                        <div class="card card-body">            
+                            <div class="row">
+                                <h2 style="font-size: 24px;"><b>Documents</b></h2>
+                            <div class="table table-responsive" *ngFor="let m of data.docs">
+                                <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>{{ m.doc_title }}</th>
+                                    </tr>        
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <td>{{ m.create_timestamp }}</td>
+                                    </tr>   
+                                    <tr>
+                                        <th>Note</th>
+                                        <td>{{ m.dsc }}</td>
+                                    </tr> 
+                                    <tr>
+                                        <th></th>
+                                        <th><button class="btn btn-warning" (click)="showDoc(m.key)">View</button></th>
+                                    </tr> 
+                                </tbody>
+                            </div>
+                            </div>
+                            <div *ngIf="uploading=='N'" class="row">
+                                <div class="col-12">
+                                    <button class="btn btn-primary" (click)="showUpload()">Upload Documents</button>
+                                </div>
+                            </div>
+                            <div *ngIf="uploading=='Y'"  class="card card-body">
+                                <h2 style="font-size: 24px;"><b>Select File to Upload</b></h2>
+                                <div class="row">
+                                    <div class="col-xl-4"> &nbsp; </div>            
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-4">Document Type</div>
+                                    <div class="col-xl-8">
+                                    <select class="form-control" [(ngModel)]="doc_title" name="doc_title" id="doc_title">
+                                        <option class="form-control" value="Employee Census">Employee Census</option>
+                                        <option class="form-control" value="Current Plan">Current Plan</option>
+                                        <option class="form-control" value="Current Invoice">Current Invoice</option>
+                                        <option class="form-control" value="Renewal">Renewal</option>  
+                                        <option class="form-control" value="IHQ Report">IHQ Report</option>
+                                        <option class="form-control" value="Other">Other</option>                      
+                                    </select> 
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-4">Note/Description</div>
+                                    <div class="col-xl-8">
+                                    <input type="text" class="form-control" [(ngModel)]="dsc" name="dsc" id="dsc">
+                                </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-4"> &nbsp; </div>            
+                                </div>
+                                <div class="mc">
+                                    <input [formControl]="file" (change)="fileChange(index,$event)" type="file" placeholder="File">
+                                    <br>
+                                    <button style="margin-top:20px" (click)="showUpload()" mat-raised-button color="default">
+                                        Cancel
+                                    </button>
+                                    <button style="margin-top:20px; margin-left:20px;" (click)="uploadFile()" mat-raised-button color="primary">
+                                        Upload
+                                    </button>
+                                </div>
+                                </div>
+                        
                         </div>
                     </div>
                 </div>               
