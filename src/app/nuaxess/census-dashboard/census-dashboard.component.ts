@@ -238,7 +238,7 @@ export class CensusDashboardComponent implements OnInit, OnDestroy {
     }
 
     postForm() {
-        this._dataService.postForm("post-add-employee-small", this.data['formData']).subscribe((data:any)=>{
+        this._dataService.postForm("post-update-census", this.data['formData']).subscribe((data:any)=>{
           if (data.error_code=="0") {
             location.reload();
           } else {     

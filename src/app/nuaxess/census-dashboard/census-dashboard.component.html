@@ -14,7 +14,7 @@
             <div class="flex items-center justify-center">
                 <img
                     class="w-8"
-                    src="assets/images/logo/logo.svg">
+                    src="assets/images/logo/logo.png">
             </div>
             <!-- Components -->
             <div class="flex items-center ml-auto">
@@ -50,7 +50,7 @@
         <div class="flex flex-0 items-center justify-center h-16 pr-6 pl-2 mt-2 mb-4 opacity-12">
             <img
                 class="max-w-36"
-                src="assets/images/logo/logo-text-on-dark.svg">
+                src="assets/images/logo/logo-text-on-dark.png">
         </div>
     </ng-container>
 </fuse-vertical-navigation>
@@ -93,7 +93,7 @@
                         [ngClass]="formFieldHelpers"
                         class="flex-auto gt-xs:pr-3">
                         <mat-hint>Cannot be edited - Make Changes in Prism</mat-hint>
-                        <mat-label><span style="color: red">Company Name</span></mat-label>
+                        <mat-label>Company Name</mat-label>
                         <input matInput id="company_name" name="company_name" [(ngModel)]="data.formData['company_name']" autocomplete="new-password" readonly>
                         <mat-icon
                             class="icon-size-5"
@@ -136,7 +136,7 @@
                     <mat-form-field
                         [ngClass]="formFieldHelpers"
                         class="flex-auto gt-xs:pl-3">
-                        <mat-label>SSN</mat-label>
+                        <mat-label><span style="color: red">SSN</span></mat-label>
                         <mat-hint><span style="color: red">Please update if necessary</span></mat-hint>
                         <input matInput id="ssn" name="ssn" [(ngModel)]="data.formData['ssn']"  autocomplete="new-password">
                         <mat-icon
@@ -147,7 +147,7 @@
                     <mat-form-field
                         [ngClass]="formFieldHelpers"
                         class="flex-auto gt-xs:pl-3">
-                        <mat-label>DOB</mat-label>
+                        <mat-label><span style="color: red">DOB</span></mat-label>
                         <mat-hint><span style="color: red">Please update if necessary</span></mat-hint>
                         <input matInput id="dob" name="dob" [(ngModel)]="data.formData['dob']"  autocomplete="new-password">
                         <mat-icon
@@ -165,7 +165,7 @@
                     </button>
                     <button mat-button *ngIf="data.formData.source=='census'" [routerLink]="['/current-terminations',data.formData['month_id']]">
                         Cancel
-                    </button>  -->
+                    </button>  
                     <button
                         class="px-6 ml-3"
                         mat-flat-button
@@ -258,8 +258,8 @@ class="flex-auto gt-xs:pr-3">
     class="icon-size-5"
     matSuffix
     [svgIcon]="'heroicons_solid:user-circle'"></mat-icon>
+    <mat-hint>Cannot be edited - Make Changes in Prism</mat-hint>
 </mat-form-field>
-<mat-hint>Cannot be edited - Make Changes in Prism</mat-hint>
 <mat-form-field
 [ngClass]="formFieldHelpers"
 class="flex-auto gt-xs:pr-3">

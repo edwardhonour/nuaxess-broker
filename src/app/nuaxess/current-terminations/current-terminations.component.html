@@ -14,7 +14,7 @@
             <div class="flex items-center justify-center">
                 <img
                     class="w-8"
-                    src="assets/images/logo/logo.svg">
+                    src="assets/images/logo/logo.png">
             </div>
             <!-- Components -->
             <div class="flex items-center ml-auto">
@@ -50,7 +50,7 @@
         <div class="flex flex-0 items-center justify-center h-16 pr-6 pl-2 mt-2 mb-4 opacity-12">
             <img
                 class="max-w-36"
-                src="assets/images/logo/logo-text-on-dark.svg">
+                src="assets/images/logo/logo-text-on-dark.png">
         </div>
     </ng-container>
 </fuse-vertical-navigation>
@@ -116,7 +116,14 @@
             <div class="col-md-12">
                 <div class="table-responsive">
                     <div class="col-lg-6 py-2">
-                        Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
+                        <div class="row">
+                            <div class="col-xl-6">
+                                Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
+                            </div>
+                            <div class="col-xl-6">
+                                <img (click)="exportexcel()" style="max-width: 60px;" src="assets/icons/excel.png">
+                            </div>
+                        </div>
                     </div>
                     <table class="table table-striped">
                         <thead>
@@ -147,6 +154,45 @@
                     <paging-controls (pageChange)="p = $event" [isItemsPerPage]="false"  
                     class="my-pagination"></paging-controls>
                 </div>
+            </div>
+        </div>
+        <div style="display:none" class="row">
+            <button class="btn btn-primary" (click)="exportexcel()">Export to Excel</button>
+            <div class="col-xl-12">
+                <table id="excel-table" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Company Name</th>
+                            <th>Client ID</th>
+                            <th>Emplyoee ID</th>
+                            <th>Dependent ID</th>
+                            <th>Name</th>
+                            <th>DOB</th>
+                            <th>Sex</th>
+                            <th>Eff Date</th>
+                            <th>Term Date</th>
+                            <th>Plan</th>
+                            <th>Level</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let m of data.list | filter: term">
+                            <td>{{ m.company_name }}</td>
+                            <td>{{ m.client_id }}</td>
+                            <td>{{ m.employee_code }}</td>
+                            <td>{{ m.dependent_code }}</td>
+                            <td>{{ m.last_name }}, {{ m.first_name }} {{ m.middle_initial }}</td>
+                            <td>{{ m.dob }}</td>
+                            <td>{{ m.gender }}</td>
+                            <td>{{ m.eff_dt }}</td>
+                            <td>{{ m.term_dt }}</td>
+                            <td>{{ m.client_plan }}</td>
+                            <td>{{ m.coverage_level }}</td>
+                            <td>{{ m.coverage_price }}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

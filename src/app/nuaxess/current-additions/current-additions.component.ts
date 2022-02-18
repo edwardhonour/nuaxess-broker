@@ -8,6 +8,7 @@ import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 import { DataService } from 'app/data.service';
 import { FormBuilder } from '@angular/forms';
+import * as XLSX from 'xlsx';
 
 @Component({
   selector: 'app-current-additions',
@@ -27,6 +28,7 @@ export class CurrentAdditionsComponent implements OnInit, OnDestroy {
     currentYear: any;
     email: any;
     user: any;
+    filename: any;
 
     /**
      * Constructor
@@ -52,6 +54,7 @@ export class CurrentAdditionsComponent implements OnInit, OnDestroy {
             localStorage.removeItem('uid');
             this._router.navigate(['/forced-off',this.data.user.force_logout]);
         }
+         this.filename=this.data.month_id+'-additions.xlsx';
           this.user=userdata;
           this.navigation=menudata
           console.log(data)
@@ -121,7 +124,21 @@ export class CurrentAdditionsComponent implements OnInit, OnDestroy {
         return this.formFieldHelpers.join(' ');
     }
 
-  
+    exportexcel(): void
+  {
+    /* pass here the table id */
+    let element = document.getElementById('excel-table');
+    const ws: XLSX.WorkSheet =XLSX.utils.table_to_sheet(element);
+ 
+    /* generate workbook and add the worksheet */
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+ 
+    /* save to file */  
+    XLSX.writeFile(wb, this.filename);
+ 
+  }
+
     postForm() {
         this._dataService.postForm("post-add-org", this.data).subscribe((data:any)=>{
           if (data.error_code=="0") {
