@@ -43,6 +43,7 @@ export class CensusDashboardComponent implements OnInit, OnDestroy {
     doc_title: any;
     inactive: any;
     active: any;
+    history: any;
     /**
      * Constructor
      */
@@ -66,6 +67,7 @@ export class CensusDashboardComponent implements OnInit, OnDestroy {
       this.uploading='N';
       this.inactive='N';
       this.active='N';
+      this.history='N'
       this._activatedRoute.data.subscribe(({ 
         data, menudata, userdata })=> { 
           this.data=data;
@@ -316,6 +318,14 @@ showActive() {
      this.active='N';
   } else {
     this.active='Y'
+  }
+}
+
+showHistory() {
+  if (this.history=='Y') {
+     this.history='N';
+  } else {
+    this.history='Y'
   }
 }
 

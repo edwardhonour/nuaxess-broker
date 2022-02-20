@@ -45,11 +45,12 @@ export class UserComponent implements OnInit, OnDestroy
      * On init
      */
     goto(page: any) {
+
         if (page=='settings') {
-            this._router.navigate(['/pages/settings'])
+            this._router.navigate(['/user-settings'])
         }
         if (page=='profile') {
-            this._router.navigate(['/pages/profile'])
+            this._router.navigate(['/user-profile'])
         }
     }
     ngOnInit(): void
@@ -118,6 +119,6 @@ export class UserComponent implements OnInit, OnDestroy
      */
     signOut(): void
     {
-        this._router.navigate(['/sign-out']);
+        this._router.navigate(['/user-logout']);
     }
 }

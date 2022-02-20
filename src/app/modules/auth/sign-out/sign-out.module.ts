@@ -19,4 +19,5 @@ import { authSignOutRoutes } from 'app/modules/auth/sign-out/sign-out.routing';
 })
 export class AuthSignOutModule
 {
+    
 }

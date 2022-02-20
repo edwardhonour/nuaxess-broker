@@ -43,17 +43,33 @@ export class NewSigninComponent implements OnInit {
    */
   ngOnInit(): void
   {
-      // Create the form
-      this.signInForm = this._formBuilder.group({
+      //----------------------------------------------------------------
+      // CHANGE THIS VARIABLE TO 'Y' WHEN MOVING TO PRODUCION 
+      // CHANGE THIS VARIABLE TO 'N' WHEN IN DEVELOPMENT AND TESTING
+      //----------------------------------------------------------------
+      let production='Y'
+      if (production=='Y') {
+        localStorage.removeItem('uid')
+        localStorage.removeItem('role')
+        location.replace('https://mynuaxess.com/#/sign-in')
+      } else {
+
+        this.signInForm = this._formBuilder.group({
           email     : ['', [Validators.required]],
           password  : ['', Validators.required],
           rememberMe: ['']
       });
 
      if (localStorage.getItem('uid')!==undefined) {
+       //-- Super Admin
       if (localStorage.getItem('role')=="sadmin") { 
           this._router.navigateByUrl('/sadmin'); 
           location.replace('/#/sadmin');
+        }
+      //-- PEO Admnn
+      if (localStorage.getItem('role')=="padmin") { 
+         // location.replace('https://mynuaxess.com/peo/#/sadmin');
+         location.replace('/#/sadmin');
         }
       if (localStorage.getItem('role')=="badmin") { 
           this._router.navigateByUrl('/badmin'); 
@@ -76,7 +92,7 @@ export class NewSigninComponent implements OnInit {
           location.replace('/#/sadmin');
         }
      }
-
+    }
 
   }
 
@@ -133,6 +149,12 @@ export class NewSigninComponent implements OnInit {
                     this._router.navigateByUrl('/sadmin'); 
                     location.replace('/#/sadmin');
                   }
+                  if (data.role=="padmin") { 
+                    this._router.navigateByUrl('/sadmin'); 
+//                    location.replace('https://mynuaxess.com/peo/#/sadmin');
+                      location.replace('/#/sadmin');
+                  }
+                  
                 if (data.role=="badmin") { 
                     this._router.navigateByUrl('/badmin'); 
                     location.replace('/#/badmin');

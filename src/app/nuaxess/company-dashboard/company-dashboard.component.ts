@@ -42,6 +42,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     doc_title: any;
     inactive: any;
     active: any;
+    history: any;
     /**
      * Constructor
      */
@@ -57,6 +58,14 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       public http: HttpClient  // used by upload
   ) { }
 
+  showHistory() {
+    if (this.history=='Y') {
+       this.history='N';
+    } else {
+      this.history='Y'
+    }
+  }
+  
     ngOnInit(): void
     {   
       this.dsc='';
@@ -65,6 +74,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       this.uploading='N';
       this.inactive='N';
       this.active='N';
+      this.history='N';
       this._activatedRoute.data.subscribe(({ 
         data, menudata, userdata })=> { 
           this.data=data;
@@ -244,6 +254,38 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
 //            this.error=data.error_message
           }
         });
+      }
+
+      activatePlan(id:any, client_plan: any) {
+
+        this.data.formData['id']=id;
+        this.data.formData['id2']=client_plan;
+        console.log(this.data.formData)
+        if (confirm("Are you sure you want to activate this plan?  The enrollment information will be updated next time the Prism batch job runs.")) {
+        this._dataService.postForm("post-activate-plan", this.data.formData).subscribe((data:any)=>{
+          console.log(data)
+          if (data.error_code=="0") {
+            location.reload();
+          } else {     
+//            this.error=data.error_message
+          }
+        });
+      }
+      }
+
+      inactivatePlan(id: any, client_plan: any) {
+        this.data.formData['id']=id;
+        this.data.formData['id2']=client_plan;
+        if (confirm("Are you sure you want to inactivate this plan?  This will remove all census and plan historical data.")) {
+
+        this._dataService.postForm("post-inactivate-plan", this.data.formData).subscribe((data:any)=>{
+          if (data.error_code=="0") {
+            location.reload();
+          } else {     
+//            this.error=data.error_message
+          }
+        });
+      }
       }
 
       sendTestEmail() {

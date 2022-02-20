@@ -389,7 +389,7 @@
                 <button style="margin-left: 20px;" [routerLink]="['/add-quote-request',data.id]" class="btn btn-primary" (click)="addEmployee()">Send Notification</button>
             </div>
 </div>
-<div *ngIf="data.users.length==0" class="card card-body">
+<div *ngIf="data.users.length==0&&data.user.org_id!='17'" class="card card-body">
     <div class="table-responsive">
         <div class="text-2xl font-semibold leading-tight">User Account</div>
         <fuse-card *ngFor="let m of data.users" class="flex flex-col w-full filter-article  px-8 pt-6 pb-4  ng-star-inserted">
@@ -485,7 +485,7 @@
                     <th>
                         Price
                     </th>
-                    <th>
+                    <th  *ngIf="data.user.org_id!='17'">
     
                     </th>
                 </tr>
@@ -507,7 +507,7 @@
         <td>
             {{ m.coverage_price }}
         </td>
-        <th>
+        <th *ngIf="data.user.org_id!='17'">
             <button *ngIf="m.term_dt==''" (click)="termEmployee(m.id, m.client_plan)" class="btn btn-danger">Terminate Plan</button>
         </th> 
     </tr>
@@ -609,7 +609,7 @@
     </tr>
             </tbody>
         </table>
-        <button  *ngIf="addF=='N'" (click)="addFamily()" class="btn btn-primary">Add Family Members</button>
+        <button  *ngIf="addF=='N'&&data.user.org_id!='17'" (click)="addFamily()" class="btn btn-primary">Add Family Members</button>
      </div>
 </div>
 <div *ngIf="addF=='Y'">

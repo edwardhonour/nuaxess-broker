@@ -64,6 +64,9 @@ import { CurrentTerminationsComponent } from './nuaxess/current-terminations/cur
 import { CurrentAdditionsComponent } from './nuaxess/current-additions/current-additions.component';
 import { ActivePlansComponent } from './nuaxess/active-plans/active-plans.component';
 import { CensusDashboardComponent } from './nuaxess/census-dashboard/census-dashboard.component';
+import { UserSettingsComponent } from './nuaxess/user-settings/user-settings.component';
+import { UserProfileComponent } from './nuaxess/user-profile/user-profile.component';
+import { UserLogoutComponent } from './nuaxess/user-logout/user-logout.component';
 
 // @formatter:off
 /* eslint-disable max-len */
@@ -109,6 +112,7 @@ export const appRoutes: Route[] = [
             {path: 'sign-out', loadChildren: () => import('app/modules/auth/sign-out/sign-out.module').then(m => m.AuthSignOutModule)},
             {path: 'unlock-session', loadChildren: () => import('app/modules/auth/unlock-session/unlock-session.module').then(m => m.AuthUnlockSessionModule)},
             {path: 'sadmin', component: AdminDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'user-logout', component: UserLogoutComponent },
             {path: 'info', component: MemberInfoComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'family', component: MemberFamilyComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'plans', component: MemberPlansComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
@@ -187,6 +191,8 @@ export const appRoutes: Route[] = [
             {path: 'guardian-lookup', component: GuardianLookupComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'enroll/:id', component: UserEnrollComponent, resolve: { data: EnrollResolver }, },
             {path: 'invoice-list', component: InvoiceListComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'user-settings', component: UserSettingsComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'user-profile', component: UserProfileComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'broker-home', component: BrokerHomeComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'nuaxess-home', component: NuaxessHomeComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'invoice-list/:id', component: InvoiceListComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },

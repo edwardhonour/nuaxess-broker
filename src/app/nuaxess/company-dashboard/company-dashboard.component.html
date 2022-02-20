@@ -107,8 +107,8 @@
         </div>
         <div class="col-xl-7">
             <div style="margin-top: 10px !important;">
-                <button style="margin-bottom: 20px" *ngIf="data.quotes.length==0"  class="btn btn-primary" [routerLink]="['/add-quote-request',data.id]">Start New Quote</button>
-                <button *ngIf="data.user.role=='sadmin'&&data.status!='prospect'" style="margin-left:20px; margin-bottom: 20px;" [routerLink]="['/add-invoice',data.id]" class="btn btn-primary">Create Invoice</button>
+                <button style="margin-bottom: 20px" *ngIf="data.quotes.length==0&&data.user.org_id!='17'"  class="btn btn-primary" [routerLink]="['/add-quote-request',data.id]">Start New Quote</button>
+                <button *ngIf="data.user.role=='sadmin'&&data.status!='prospect'&&data.user.org_id!='17'" style="margin-left:20px; margin-bottom: 20px;" [routerLink]="['/add-invoice',data.id]" class="btn btn-primary">Create Invoice</button>
             </div>
         </div>
     </div>
@@ -128,11 +128,11 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
+<!--        <tr>
             <th>Company Type:</th>
             <td>{{ data.company_type }}</td>
-        </tr>
-        <tr>
+        </tr> -->
+ <!--       <tr>
             <th>Employee Count:</th>
             <td>{{ data.employee_count }}</td>
         </tr>
@@ -143,15 +143,15 @@
         <tr>
             <th>Contact Name:</th>
             <td>{{ data.first_name }} {{ data.last_name }}</td>
-        </tr>
+        </tr> -->
         <tr>
             <th>Phone:</th>
             <td>{{ data.phone_mobile }}</td>
         </tr>
-        <tr>
+<!--        <tr>
             <th>Website:</th>
             <td>{{ data.website }}</td>
-        </tr>
+        </tr> -->
         <tr>
             <th>Address:</th>
             <td>{{ data.address }}</td>
@@ -172,16 +172,10 @@
             <th>Status:</th>
             <td>{{ data.status }}</td>
         </tr>
-        <tr>
+<!--        <tr>
             <th>Description:</th>
             <td>{{ data.dsc }}</td>
-        </tr>
-        <tr>
-            <th></th>
-            <td>
-            <!--   <button class="btn btn-warning" [routerLink]="['/edit-company',data.id]">Edit Company</button> -->
-            </td>
-        </tr>
+        </tr> -->
     </tbody>
 </table>
 </div>
@@ -271,7 +265,7 @@
                         <th>Plan</th>
                         <th>Coverage Level</th>
                         <th>Coverage Price</th>
-           <!--             <th></th> -->
+                        <th></th> 
                     </tr>        
                 </thead>
                 <tbody>
@@ -279,7 +273,7 @@
                         <th>{{ m.client_plan }}</th>
                         <td>{{ m.coverage_level }}</td>
                         <td>{{ m.coverage_price }}</td>
-           <!--         <td><button class="btn btn-danger" (click)="inactivatePlan(m.id);">Inactivate</button></td> -->
+                        <td><button class="btn btn-danger" (click)="inactivatePlan(data.id, m.client_plan);">(-)</button></td> 
                     </tr>   
                 </tbody>
             </div>
@@ -295,14 +289,14 @@
                     <tr>
                         <th>Plan</th>
                         <th>Name</th>
-              <!--         <th></th> -->
+                       <th></th> 
                     </tr>        
                 </thead>
                 <tbody>
                     <tr *ngFor="let m of data.inactive">
                         <th>{{ m.planId }}</th>
                         <td>{{ m.planDescription }}</td>
-              <!--         <td><button class="btn btn-primary" (click)="activatePlan(m.id);">Activate</button></td> -->
+                        <td><button class="btn btn-primary" (click)="activatePlan(data.id, m.planId);">(+)</button></td> 
                     </tr>   
                 </tbody>
             </div>
@@ -350,8 +344,11 @@
 </div>        
 <div class="col-md-12 col-xl-4">
     <div class="card card-body"  *ngIf="data.monthlist.length!='0'&&data.status!='prospect'">
-        <h2 style="font-size: 24px;"><b>Monthly History</b></h2>
-        <div class="table-responsive">
+        <h2 style="font-size: 24px;"><b>Monthly History</b>
+        <button *ngIf="history=='N'" class="btn" (click)="showHistory()">Show ({{ data.monthlist.length }}) </button> 
+        <button *ngIf="history=='Y'" class="btn" (click)="showHistory()">Hide</button>
+    </h2>
+        <div *ngIf="history=='Y'" class="table-responsive">
         <table class="table table-responsive">
         <thead>
             <tr>
@@ -471,7 +468,7 @@
 
 
     </div>  <!-- END CONTAINER ROW 114-->
-<div class="row" *ngIf="data.insured_lives!='0'">
+<div class="row">
     <div class="col-xl-2">
         &nbsp;
  </div>

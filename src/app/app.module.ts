@@ -113,6 +113,9 @@ import { CurrentTerminationsComponent } from './nuaxess/current-terminations/cur
 import { CurrentAdditionsComponent } from './nuaxess/current-additions/current-additions.component';
 import { ActivePlansComponent } from './nuaxess/active-plans/active-plans.component';
 import { CensusDashboardComponent } from './nuaxess/census-dashboard/census-dashboard.component';
+import { UserProfileComponent } from './nuaxess/user-profile/user-profile.component';
+import { UserSettingsComponent } from './nuaxess/user-settings/user-settings.component';
+import { UserLogoutComponent } from './nuaxess/user-logout/user-logout.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -187,7 +190,10 @@ const routerConfig: ExtraOptions = {
         CurrentTerminationsComponent,
         CurrentAdditionsComponent,
         ActivePlansComponent,
-        CensusDashboardComponent
+        CensusDashboardComponent,
+        UserProfileComponent,
+        UserSettingsComponent,
+        UserLogoutComponent
     ],
     imports     : [
         BrowserModule,
