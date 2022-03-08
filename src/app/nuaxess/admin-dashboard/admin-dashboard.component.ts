@@ -20,6 +20,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy
   navigation: Navigation;
   isScreenSmall: boolean;
   term: any;
+  hide: any;
   p: any;
 
     chartGithubIssues: ApexOptions = {};
@@ -59,6 +60,7 @@ index: any;
      */
     ngOnInit(): void
     {      
+      this.hide='Y';
             this._activatedRoute.data.subscribe(({ 
               data, menudata, userdata })=> { 
               this.data=data;

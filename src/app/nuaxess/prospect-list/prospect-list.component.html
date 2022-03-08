@@ -79,7 +79,7 @@
         <div class="flex-1 min-w-0">
             <div class="mt-2">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
-                    Active Company List 
+                    Prospect List 
                 </h2>
             </div>
         </div>
@@ -88,7 +88,7 @@
         <div class="flex-1 min-w-0">
             <div class="mt-2">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
-                    <button class="btn btn-primary" [routerLink]="['/add-company/data.user.org_id']">Add Prospect</button>
+                    <button class="btn btn-primary" [routerLink]="['/add-company',data.user.org_id]">Add Prospect</button>
                 </h2>
             </div>
         </div>
@@ -100,7 +100,7 @@
                 <div style="margin-top: 20px !important;">
                     <a class="inline-flex items-center leading-6 text-primary hover:underline" [routerLink]="['/sadmin']"><span class="inline-flex items-center"><mat-icon role="img" class="mat-icon notranslate icon-size-5 text-current mat-icon-no-color" aria-hidden="true" data-mat-icon-type="svg" data-mat-icon-name="arrow-sm-left" data-mat-icon-namespace="heroicons_solid"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" fit="" height="100%" width="100%" preserveAspectRatio="xMidYMid meet" focusable="false">
                         <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path>
-                    </svg></mat-icon><span class="ml-1.5 font-medium leading-5">Back to Admin Dashboard</span></span></a>
+                    </svg></mat-icon><span class="ml-1.5 font-medium leading-5">Back Home</span></span></a>
                 </div>
             </div>
             <div class="col-md-12">
@@ -112,28 +112,23 @@
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Company Name</th>
-                                <th>Contact Name</th>
-                                <th>Invoice Contact</th>
-                                <th>Census Count</th>
-                                <th>Additions</th>
-                                <th>Terminations</th>
-                                <th>EFT Type</th>
+                                <th>Prospect/Contact</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Broker Name</th>
+                                <th>Quote Status</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let m of data.list | filter: term | paginate: { currentPage: p , itemsPerPage: 25}">
                                 <td>{{ m.id }}</td>
-                                <td>{{ m.company_name }}</td>
-                                <td>{{ m.contact_name }}</td>
-                                <td>{{ m.invoice_contact_name }}</td>
-                                <td>{{ m.census_count }}</td>
-                                <td>{{ m.addition_count }}</td>
-                                <td>{{ m.termination_count }}</td>
-                                <td>{{ m.eft_account }}</td>
-                                <td><button *ngIf="data.id!='apa'" [routerLink]="['/company-dashboard',m.id]" class="btn btn-primary">View</button></td>
-                                <td><button *ngIf="data.id=='apa'" [routerLink]="['/apa-company-dashboard',m.id]" class="btn btn-danger">View</button></td>
+                                <td>{{ m.company_name }}<br>{{ m.contact_name }}</td>
+                                <td>{{ m.contact_phone }}</td>
+                                <td>{{ m.contact_email }}</td>
+                                <td>{{ m.broker_name }}</td>
+                                <td>{{ m.quote_status }}</td>
+                                <td><button [routerLink]="['/prospect-dashboard',m.id]" class="btn btn-primary">View</button></td>
                             </tr>
                         </tbody>
                     </table>

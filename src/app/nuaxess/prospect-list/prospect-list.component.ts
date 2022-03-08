@@ -8,12 +8,16 @@ import { Navigation } from 'app/core/navigation/navigation.types';
 import { NavigationService } from 'app/core/navigation/navigation.service';
 import { DataService } from 'app/data.service';
 import { FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { NgLocalization } from '@angular/common';
+
 @Component({
-  selector: 'app-add-company',
-  templateUrl: './add-company.component.html',
-  styleUrls: ['./add-company.component.scss']
+  selector: 'app-prospect-list',
+  templateUrl: './prospect-list.component.html',
+  styleUrls: ['./prospect-list.component.scss']
 })
-export class AddCompanyComponent implements OnInit, OnDestroy {
+export class ProspectListComponent implements OnInit, OnDestroy {
   navigation: Navigation;
   isScreenSmall: boolean;
   term: any;
@@ -55,8 +59,7 @@ export class AddCompanyComponent implements OnInit, OnDestroy {
           this.navigation=menudata
           console.log(data)
       }) 
-
-          
+                      
             this._fuseMediaWatcherService.onMediaChange$
             .pipe(takeUntil(this._unsubscribeAll))
             .subscribe(({matchingAliases}) => {
@@ -123,9 +126,9 @@ export class AddCompanyComponent implements OnInit, OnDestroy {
 
   
     postForm() {
-        this._dataService.postForm("post-add-company", this.data).subscribe((data:any)=>{
+        this._dataService.postForm("post-add-org", this.data).subscribe((data:any)=>{
           if (data.error_code=="0") {
-            this._router.navigate(['/prospect-dashboard',data.id])
+            this._router.navigate(['/org-dashboard',data.id])
           } else {     
 //            this.error=data.error_message
           }

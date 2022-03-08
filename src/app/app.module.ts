@@ -69,37 +69,28 @@ import { UserEnrollComponent } from './nuaxess/user-enroll/user-enroll.component
 import { BadminComponent } from './nuaxess/badmin/badmin.component';
 import { EmployeeDashboardComponent } from './nuaxess/employee-dashboard/employee-dashboard.component';
 import { FuseCardComponent, FuseCardModule } from '@fuse/components/card';
-//import { EmployeeIHQComponent } from './nuaxess/employee-ihq/employee-ihq.component';
-//import { MemberInfoComponent } from './nuaxess/member-info/member-info.component';
-//import { MemberFamilyComponent } from './nuaxess/member-family/member-family.component';
-//import { MemberPlansComponent } from './nuaxess/member-plans/member-plans.component';
-//import { MemberIHQComponent } from './nuaxess/member-ihq/member-ihq.component';
-//import { MemberProfileComponent } from './nuaxess/member-profile/member-profile.component';
-//import { MemberMedicationsComponent } from './nuaxess/member-medications/member-medications.component';
-//import { MemberInsuranceComponent } from './nuaxess/member-insurance/member-insurance.component';
 import { InvalidTokenComponent } from './nuaxess/invalid-token/invalid-token.component';
 import { AddBrokerComponent } from './nuaxess/add-broker/add-broker.component';
 import { EditBrokerComponent } from './nuaxess/edit-broker/edit-broker.component';
 import { ForcedLogoutComponent } from './nuaxess/forced-logout/forced-logout.component';
 import { NewSigninComponent } from './nuaxess/new-signin/new-signin.component';
 import { MemberLookupComponent } from './nuaxess/member-lookup/member-lookup.component';
-//import { GuardianLookupComponent } from './nuaxess/guardian-lookup/guardian-lookup.component';
 import { EmployeeLookupComponent } from './nuaxess/employee-lookup/employee-lookup.component';
 import { InvoiceDashboardComponent } from './nuaxess/invoice-dashboard/invoice-dashboard.component';
 import { InvoiceListComponent } from './nuaxess/invoice-list/invoice-list.component';
-//import { ApaPlanListComponent } from './nuaxess/apa-plan-list/apa-plan-list.component';
-//import { ApaCompanyDashboardComponent } from './nuaxess/apa-company-dashboard/apa-company-dashboard.component';
 import { CensusHistoryComponent } from './nuaxess/census-history/census-history.component';
 import { BrokerHomeComponent } from './nuaxess/broker-home/broker-home.component';
-//import { NuaxessHomeComponent } from './nuaxess/nuaxess-home/nuaxess-home.component';
-//import { PeoCompanyListComponent } from './nuaxess/peo-company-list/peo-company-list.component';
 import { CurrentCensusComponent } from './nuaxess/current-census/current-census.component';
 import { CurrentTerminationsComponent } from './nuaxess/current-terminations/current-terminations.component';
 import { CurrentAdditionsComponent } from './nuaxess/current-additions/current-additions.component';
-//import { ActivePlansComponent } from './nuaxess/active-plans/active-plans.component';
 import { UserProfileComponent } from './nuaxess/user-profile/user-profile.component';
 import { UserSettingsComponent } from './nuaxess/user-settings/user-settings.component';
 import { UserLogoutComponent } from './nuaxess/user-logout/user-logout.component';
+import { CommissionListComponent } from './nuaxess/commission-list/commission-list.component';
+import { CommissionDashboardComponent } from './nuaxess/commission-dashboard/commission-dashboard.component';
+import { BrokerListComponent } from './nuaxess/broker-list/broker-list.component';
+import { ProspectListComponent } from './nuaxess/prospect-list/prospect-list.component';
+import { ProspectDashboardComponent } from './nuaxess/prospect-dashboard/prospect-dashboard.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -121,55 +112,38 @@ const routerConfig: ExtraOptions = {
         CompanyDashboardComponent,
         QuoteListComponent,
         QuoteDashboardComponent,
-   //     AddMemberComponent,
-   //     MemberListComponent,
-   //     MemberDashboardComponent,
         AddQuoteComponent,
         AddQuoteRequestComponent,
         QuoteRequestListComponent,
         QuoteRequestDashboardComponent,
- //       EditOrgComponent,
         EditUserComponent,
         EditCompanyComponent,
-  //      EditPlanComponent,
         EditQuoteComponent,
- //       EditMemberComponent,
         UserEnrollComponent,
         BadminComponent,
- //       EadminComponent,
-  //      ActivePlanDashboardComponent,
         EmployeeDashboardComponent,
- //       EmployeeIHQComponent,
- //       MemberInfoComponent,
- //       MemberFamilyComponent,
- //       MemberPlansComponent,
- //       MemberIHQComponent,
- //       MemberProfileComponent,
- //       MemberMedicationsComponent,
- //       MemberInsuranceComponent,
         InvalidTokenComponent,
         AddBrokerComponent,
         EditBrokerComponent,
         ForcedLogoutComponent,
         NewSigninComponent,
         MemberLookupComponent,
- //       GuardianLookupComponent,
         EmployeeLookupComponent,
         InvoiceDashboardComponent,
         InvoiceListComponent,
- //       ApaPlanListComponent,
- //       ApaCompanyDashboardComponent,
         CensusHistoryComponent,
         BrokerHomeComponent,
- //       NuaxessHomeComponent,
- //       PeoCompanyListComponent,
         CurrentCensusComponent,
         CurrentTerminationsComponent,
         CurrentAdditionsComponent,
-  //      ActivePlansComponent,
         UserProfileComponent,
         UserSettingsComponent,
-        UserLogoutComponent
+        UserLogoutComponent,
+        CommissionListComponent,
+        CommissionDashboardComponent,
+        BrokerListComponent,
+        ProspectListComponent,
+        ProspectDashboardComponent
     ],
     imports     : [
         BrowserModule,
