@@ -22,6 +22,14 @@ export class AdminDashboardComponent implements OnInit, OnDestroy
   term: any;
   hide: any;
   p: any;
+  formFieldHelpers: string[] = [''];
+  dsc: any;
+  doc_title: any;
+  active: any;
+  prospects: any;
+  commissions: any;
+  invoices: any;
+
 
     chartGithubIssues: ApexOptions = {};
     chartTaskDistribution: ApexOptions = {};
@@ -30,6 +38,7 @@ export class AdminDashboardComponent implements OnInit, OnDestroy
     chartMonthlyExpenses: ApexOptions = {};
     chartYearlyExpenses: ApexOptions = {};
     data: any;
+    docs: any;
     selectedProject: string = 'ACME Corp. Backend App';
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 currentYear: any;
@@ -37,6 +46,8 @@ email: any;
 user: any;
 //Upload 
 index: any;
+uploading: any;
+tuploading: any;
     /**
      * Constructor
      */
@@ -58,9 +69,72 @@ index: any;
     /**
      * On init
      */
+     showUpload() {
+      if (this.uploading=='Y') {
+        this.uploading='N'
+      } else {
+        this.uploading='Y'
+      }
+   }
+
+   showTemplateUpload() {
+    if (this.tuploading=='Y') {
+      this.tuploading='N'
+    } else {
+      this.tuploading='Y'
+    }
+ }
+
+   showDocs() {
+    if (this.docs=='Y') {
+       this.docs='N';
+    } else {
+      this.docs='Y'
+    }
+  }
+
+  showProspects() {
+    if (this.prospects=='Y') {
+       this.prospects='N';
+    } else {
+      this.prospects='Y'
+    }
+  }
+
+  showInvoices() {
+    if (this.invoices=='Y') {
+       this.invoices='N';
+    } else {
+      this.invoices='Y'
+    }
+  }
+
+  showActive() {
+    if (this.active=='Y') {
+       this.active='N';
+    } else {
+      this.active='Y'
+    }
+  }
+
+  showCommissions() {
+    if (this.commissions=='Y') {
+       this.commissions='N';
+    } else {
+      this.commissions='Y'
+    }
+  }
+
     ngOnInit(): void
     {      
+      this.uploading='N';
       this.hide='Y';
+      this.docs='N';
+      this.active='N';
+      this.prospects='N';
+      this.commissions='N';
+      this.invoices='N';
+      this.tuploading='N';
             this._activatedRoute.data.subscribe(({ 
               data, menudata, userdata })=> { 
               this.data=data;
@@ -174,52 +248,99 @@ index: any;
         }
     }
 
-    //------------------------------
-    // Upload Form
-    //------------------------------
+      //------------------------------
+      // Upload Form
+      //------------------------------
 
-    file=new FormControl('')
-    file_data:any=''
-    fileChange(index,event) {
-      
-      const fileList: FileList = event.target.files;
-      //check whether file is selected or not
-      if (fileList.length > 0) {
-  
-          const file = fileList[0];
-          //get file information such as name, size and type
-          console.log('finfo',file.name,file.size,file.type);
-          //max file size is 8 mb
-          if((file.size/1048576)<=8)
-          {
-            let formData = new FormData();
-            let info={id:2,name:'joetest'}
-            formData.append('file', file, file.name);
-            formData.append('id','2');
-            formData.append('tz',new Date().toISOString())
-            formData.append('update','2')
-            formData.append('info',JSON.stringify(info))
-            this.file_data=formData
-            
-          }else{
-            alert('File size exceeds 8 MB. Please choose less than 8 MB');
-          }
-          
-      }
-  
-    }
-  
-    ip="https://www.mynuaxess.com/"
+      file=new FormControl('')
+      file_data:any=''
+
+      fileChange(index,event) {
+        
+        const fileList: FileList = event.target.files;
+        //check whether file is selected or not
+        if (fileList.length > 0) {
     
-    uploadFile()
-      {
-        this.http.post(this.ip+'upload.php',this.file_data)
-        .subscribe(res => {
-        //send success response
-        console.log(res.toString)
-        }, (err) => {
-        //send error response
-        console.log('Error')
-      });
+            const file = fileList[0];
+            //get file information such as name, size and type
+            console.log('finfo',file.name,file.size,file.type);
+            //max file size is 8 mb
+            if((file.size/1048576)<=8)
+            {
+              let formData = new FormData();
+              formData.append('file', file, file.name);
+              //formData.append('company_id',this.data.id);
+              formData.append('company_id','0');
+              formData.append('user_id',this.data.user.id);
+              formData.append('dsc',this.doc_title);
+              formData.append('doc_title',this.doc_title);
+              this.file_data=formData
+              
+            }else{
+              alert('File size exceeds 8 MB. Please choose less than 8 MB');
+            }
+            
+        }
+    
       }
+    
+      ip="https://myna-docs.com/api/"
+    
+      getProfile(id: any, status: any) {
+        if (status=="Enrolled"||status=="enrolled"||status=="enrolling") {
+          window.open(
+            "https://myna-docs.com/api/get_quote_template.php?id="+id);
+        }  else {
+          window.open(
+            "https://myna-docs.com/api/get_quote_template.php?id="+id);
+        }
+      }
+
+
+      uploadFile() {
+        this._dataService.postTemplate(this.file_data).subscribe((data:any)=>{
+          if (data.error_code==0) {
+              console.log(data)
+              window.open(
+                "https://myna-docs.com/api/"+data.filename);
+          }
+        });   
+      }
+
+      uploadFile2() {
+          console.log(this.file_data);
+
+          /*
+          if (this.doc_title=="QUOTING") {
+            this.http.post(this.ip+'upload_quoting_template.php',this.file_data)
+          .subscribe(res => {
+            //location.reload()
+            this.uploading='N'
+            console.log(res.toString)
+          }, (err) => {
+          //send error response
+          alert('error occured')
+        });
+        }
+
+        if (this.doc_title=="ENROLLMENT") {
+            this.http.post(this.ip+'upload_enrollment_template.php',this.file_data)
+          .subscribe(res => {
+            //location.reload()
+            window.open(
+              "https://myna-docs.com/api/"+res.filename);
+            this.uploading='N'
+            console.log(res.toString)
+          }, (err) => {
+          //send error response
+          alert('error occured')
+        });
+        }
+        */
+      }
+
+        showDoc(id: any) {
+          window.open('https://myna-docs.com/?id='+id,'_new')
+        }
+
 }
