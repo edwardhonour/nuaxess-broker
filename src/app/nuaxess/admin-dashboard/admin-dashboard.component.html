@@ -137,16 +137,6 @@
                                                     </button>
                                                     <mat-menu #summaryMenu="matMenu">
                                                         <button [routerLink]="['/company-list']" mat-menu-item>All Company List</button>
-                                                        <button [routerLink]="['/company-list/new']" mat-menu-item>New/Added Only</button>
-                                                        <button [routerLink]="['/company-list/starting']" mat-menu-item>Started</button>
-                                                        <button [routerLink]="['/company-list/requesting']" mat-menu-item>Preparing Quote Request</button>
-                                                        <button [routerLink]="['/company-list/submitted']" mat-menu-item>Submitted Quote Request</button>
-                                                        <button [routerLink]="['/company-list/quoted']" mat-menu-item>Quote Submitted</button>
-                                                        <button [routerLink]="['/company-list/rejected']" mat-menu-item>Quote Rejected</button>
-                                                        <button [routerLink]="['/company-list/rejected']" mat-menu-item>Quote Accepted</button>
-                                                        <button [routerLink]="['/company-list/rejected']" mat-menu-item>Enrolling</button>
-                                                        <button [routerLink]="['/company-list/rejected']" mat-menu-item>Enrolled</button>
-                                                        <button [routerLink]="['/add-company']" mat-menu-item>Add Company</button>
                                                     </mat-menu>
                                                 </div>
                                             </div>
@@ -168,12 +158,7 @@
                                                             [svgIcon]="'heroicons_solid:dots-vertical'"></mat-icon>
                                                     </button>
                                                     <mat-menu #overdueMenu="matMenu">
-                                                        <button [routerLink]="['/quote-list/preparing']" mat-menu-item>Preparing Request</button>
-                                                        <button [routerLink]="['/quote-list/requested']" mat-menu-item>Requested</button>
-                                                        <button [routerLink]="['/quote-list/pending']" mat-menu-item>Pending</button>
-                                                        <button [routerLink]="['/quote-list/accepted']" mat-menu-item>Accepted</button>
-                                                        <button [routerLink]="['/quote-list/rejected']" mat-menu-item>Rejected</button>
-                                                        <button [routerLink]="['/quote-list/enrolling']" mat-menu-item>Enrolling</button>
+   
                                                     </mat-menu>
                                                 </div>
                                             </div>
@@ -238,82 +223,258 @@
                             </mat-tab>            
                         </mat-tab-group>
                     </div>
-                    <div class="container-fluid" *ngIf="hide=='N'">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1 style="font-size: 24px; font-weight: bold;">Quotes</h1>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="table-responsive">
-                                    <div class="col-lg-6 py-2">
-                                        Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
-                                    </div>
-                                    <table class="table table-striped">
-                                        <thead>
-                                            <tr>
-                                                <th>ID</th>
-                                                <th>Quote Number</th>
-                                                <th>Company</th>
-                                                <th>Broker Name</th>
-                                                <th>Broker Phone</th>
-                                                <th>Email</th>
-                                                <th style="text-align: right;">Medical</th>
-                                                <th style="text-align: right;">Dental</th>
-                                                <th style="text-align: right;">Vision</th>
-                                                <th style="text-align: right;">Status</th>
-                                                <th></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr *ngFor="let m of data.quotes | filter: term ">
-                                                <td>{{ m.id }}</td>
-                                                <td>{{ m.quote_id }}</td>
-                                                <td>{{ m.company_name }}</td>
-                                                <td>Edward Honour</td>
-                                                <td>808-425-1261</td>
-                                                <td>ehonour@nuaxess.com</td>
-                                                <td style="text-align: right;">{{ m.medical }}</td>
-                                                <td style="text-align: right;">{{ m.dental }}</td>
-                                                <td style="text-align: right;">{{ m.vision }}</td>
-                                                <td style="text-align: right;">{{ m.status }}</td>
-                                                <td><button [routerLink]="['/company-dashboard',m.company_id]" class="btn btn-primary">View</button></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
+                    <div class="container">
+
+
+                    <div class="flex flex-col sm:flex-row flex-0 sm:items-center sm:justify-between p-6 sm:py-8 sm:px-10 border-b bg-card dark:bg-transparent">
+                        <div class="flex-1 min-w-0">
+                            <div class="mt-2">
+                                <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                                    <button class="btn btn-primary" [routerLink]="['/add-company/data.user.org_id']">Add Prospect</button>
+                                </h2>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <h1 style="font-size: 24px; font-weight: bold;">Organizations</h1>
+                        <div class="flex-1 min-w-0">
+                            <div class="col-xl-12">
+                             </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="col-xl-12">
+                             </div>
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="col-xl-12">
+                                <a (click)="getProfile(0,'prospect')"><img style="max-width:40px;" src="./assets/icons/excel.png"><br><b>Download Company Template</b></a>
                             </div>
-                            <div class="col-md-12">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <div class="col-xl-12">
+                                <a (click)="showUpload()"><img style="max-width:40px;" src="./assets/icons/upload.png"><br><b>Upload Template</b></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="uploading=='Y'" class="container-fluid">
+                        <div class="row">
+                            <div class="col-xl-3">
+                
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="card card-body">
+                                    <h2 style="font-size: 24px;"><b>Select File to Upload</b></h2>
+                                    <div class="row">
+                                        <div class="col-xl-4"> &nbsp; </div>            
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-4">Template Type</div>
+                                        <div class="col-xl-8">
+                                        <select class="form-control" [(ngModel)]="doc_title" name="doc_title" id="doc_title">
+                                            <option class="form-control" value="QUOTING">Company/Quoting Template</option>
+                                            <option class="form-control" value="ENROLLMENT">Enrollment/Census</option>             
+                                        </select> 
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-4">Note/Description</div>
+                                        <div class="col-xl-8">
+                                        <input type="text" class="form-control" [(ngModel)]="dsc" name="dsc" id="dsc">
+                                    </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xl-4"> &nbsp; </div>            
+                                    </div>
+                                    <div class="mc">
+                                        <input [formControl]="file" (change)="fileChange(index,$event)" type="file" placeholder="File">
+                                        <br>
+                                        <button style="margin-top:20px" (click)="showUpload()" mat-raised-button color="default">
+                                            Cancel
+                                        </button>
+                                        <button style="margin-top:20px; margin-left:20px;" (click)="uploadFile()" mat-raised-button color="primary">
+                                            Upload
+                                        </button>
+                                    </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card card-body" style="margin-top: 20px;">
+                                <div class="row">
+                                <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <div class="row">
+                                                <div class="col-xl-9"><h1 style="font-size: 24px; font-weight: bold;">Prospects</h1></div>
+                                                <div class="col-xl-3">
+                                                    <button *ngIf="prospects=='N'" class="btn" (click)="showProspects()">Show ({{ data.prospects.length }})</button>
+                                                    <button *ngIf="prospects=='Y'" class="btn" (click)="showProspects()">Hide</button>
+                                                </div>
+                                            </div>
+                                            
+                                            <div *ngIf="prospects=='Y'" class="col-lg-6 py-2">
+                                                Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
+                                            </div>
+                                            <table *ngIf="prospects=='Y'" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                <th>ID</th>
+                                                <th>Prospect</th>
+                                                <th>Medical</th>
+                                                <th>Dental</th>
+                                                <th>Vision</th>
+                                                <th>Status</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let m of data.prospects | filter: term | paginate: { currentPage: p , itemsPerPage: 25}" [ngStyle]="{'background-color':m.status !== 'quoted' ? '#FFFFFF' : '#3399FF' }">  
+                                                <td>{{ m.id }}</td>
+                                                <td>{{ m.company_name }}</td>
+                                                <td>{{ m.medical }}</td>
+                                                <td>{{ m.dental }}</td>
+                                                <td>{{ m.vision }}</td>
+                                                <td>{{ m.status }}</td>
+                                                <td><button [routerLink]="['/company-dashboard',m.id]" class="btn btn-primary">View</button></td>
+                                                <td><button (click)="getProfile(m.id,m.status)" class="btn">(Get XLSX)</button></td>
+                                            </tr>
+                                            </tbody>
+                                            </table>
+                                </div>
+                            
+                                  
+                        </div>
+                        </div>
+                            </div>
+                            <!--
+                            <div class="card card-body" style="margin-top: 20px;">
+                                <div class="row">
+                                <div class="col-md-12">
+                                        <div class="table-responsive">
+                                            <div class="row">
+                                                <div class="col-xl-9"><h1 style="font-size: 24px; font-weight: bold;">Invoice Status</h1></div>
+                                                <div class="col-xl-3">
+                                                    <button *ngIf="invoices=='N'" class="btn" (click)="showInvoices()">Show ({{ data.prospects.length }})</button>
+                                                    <button *ngIf="invoices=='Y'" class="btn" (click)="showInvoices()">Hide</button>
+                                                </div>
+                                            </div>
+                                            
+                                            <div *ngIf="invoices=='Y'" class="col-lg-6 py-2">
+                                                Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
+                                            </div>
+                                            <table *ngIf="invoices=='Y'" class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                <th>ID</th>
+                                                <th>Prospect</th>
+                                                <th>Medical</th>
+                                                <th>Dental</th>
+                                                <th>Vision</th>
+                                                <th>Status</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr *ngFor="let m of data.invoices | filter: term | paginate: { currentPage: p , itemsPerPage: 25}" [ngStyle]="{'background-color':m.status !== 'quoted' ? '#FFFFFF' : '#3399FF' }">  
+                                                <td>{{ m.id }}</td>
+                                                <td>{{ m.company_name }}</td>
+                                                <td>{{ m.medical }}</td>
+                                                <td>{{ m.dental }}</td>
+                                                <td>{{ m.vision }}</td>
+                                                <td>{{ m.status }}</td>
+                                                <td><button [routerLink]="['/company-dashboard',m.id]" class="btn btn-primary">View</button></td>
+                                                <td><button (click)="getProfile(m.id,m.status)" class="btn">(Get XLSX)</button></td>
+                                            </tr>
+                                            </tbody>
+                                            </table>
+                                </div>
+                        </div> 
+                        </div>
+                            </div> -->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card card-body" style="margin-top: 20px;">
                                 <div class="table-responsive">
-                                    <div class="col-lg-6 py-2">
+                                    <div class="row">
+                                        <div class="col-xl-9"><h1 style="font-size: 24px; font-weight: bold;">Active Clients</h1></div>
+                                        <div class="col-xl-3">
+                                            <button *ngIf="active=='N'" class="btn" (click)="showActive()">Show ({{ data.active.length }})</button>
+                                            <button *ngIf="active=='Y'" class="btn" (click)="showActive()">Hide</button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="active=='Y'" class="col-lg-6 py-2">
                                         Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
                                     </div>
-                                    <table class="table table-striped">
+                                    <table *ngIf="active=='Y'"  class="table table-striped">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
-                                                <th>Organization Name</th>
-                                                <th style="text-align: right;">Broker Count</th>
+                                                <th>Company Name</th>
+                                                <th>Enrolled (Medical)</th>
+                                                <th></th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr *ngFor="let m of data.orgs | filter: term ">
+   <!--                                        <tr *ngFor="let m of data.prospects | filter: term | paginate: { currentPage: p , itemsPerPage: 25}" [ngStyle]="{'background-color':m.bad_count === '0' ? '#FFFFFF' : '#FCE5EB' }"> -->
+                                               <tr *ngFor="let m of data.active | filter: term | paginate: { currentPage: p , itemsPerPage: 25}">
+ 
                                                 <td>{{ m.id }}</td>
-                                                <td>{{ m.org_name }}</td>
-                                                <td style="text-align: right;">{{ m.broker_count }}</td>
-                                                <td><button [routerLink]="['/org-dashboard',m.id]" class="btn btn-primary">View</button></td>
+                                                <td>{{ m.company_name }}</td>
+                                                <td>{{ m.active }}</td>
+                                                <td><button [routerLink]="['/company-dashboard',m.id]" class="btn btn-primary">View</button></td>
+                                                <td><button (click)="getProfile(m.id,m.status)" class="btn">(Get XLSX)</button></td>
                                             </tr>
                                         </tbody>
                                     </table>
+                                    <paging-controls *ngIf="active=='Y'" (pageChange)="p = $event" [isItemsPerPage]="false"  
+                                    class="my-pagination"></paging-controls>
                                 </div>
                             </div>
-                        </div>:1
-                         
+  <!--                          <div class="card card-body" style="margin-top: 20px;">
+                                <div class="table-responsive">
+                                    <div class="row">
+                                        <div class="col-xl-9"><h1 style="font-size: 24px; font-weight: bold;">Commission Reports</h1></div>
+                                        <div class="col-xl-3">
+                                            <button *ngIf="active=='N'" class="btn" (click)="showActive()">Show ({{ data.active.length }})</button>
+                                            <button *ngIf="active=='Y'" class="btn" (click)="showActive()">Hide</button>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="active=='Y'" class="col-lg-6 py-2">
+                                        Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
+                                    </div>
+                                    <table *ngIf="active=='Y'"  class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Company Name</th>
+                                                <th>Enrolled (Medical)</th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                               <tr *ngFor="let m of data.active | filter: term | paginate: { currentPage: p , itemsPerPage: 25}">
+ 
+                                                <td>{{ m.id }}</td>
+                                                <td>{{ m.company_name }}</td>
+                                                <td>{{ m.active }}</td>
+                                                <td><button [routerLink]="['/company-dashboard',m.id]" class="btn btn-primary">View</button></td>
+                                                <td><button (click)="getProfile(m.id,m.status)" class="btn">(Get XLSX)</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <paging-controls *ngIf="active=='Y'" (pageChange)="p = $event" [isItemsPerPage]="false"  
+                                    class="my-pagination"></paging-controls>
+                                </div>
+                            </div>
+                            </div>
+                        </div>     -->                    
                     </div>
                 </div>
             

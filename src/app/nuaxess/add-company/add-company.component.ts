@@ -125,7 +125,7 @@ export class AddCompanyComponent implements OnInit, OnDestroy {
     postForm() {
         this._dataService.postForm("post-add-company", this.data).subscribe((data:any)=>{
           if (data.error_code=="0") {
-            this._router.navigate(['/prospect-dashboard',data.id])
+            this._router.navigate(['/company-dashboard',data.id])
           } else {     
 //            this.error=data.error_message
           }

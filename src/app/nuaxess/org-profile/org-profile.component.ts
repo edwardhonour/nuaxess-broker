@@ -10,23 +10,19 @@ import { DataService } from 'app/data.service';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 
+
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss']
+  selector: 'app-org-profile',
+  templateUrl: './org-profile.component.html',
+  styleUrls: ['./org-profile.component.scss']
 })
-export class UserProfileComponent implements OnInit, OnDestroy {
+export class OrgProfileComponent implements OnInit, OnDestroy {
   navigation: Navigation;
   isScreenSmall: boolean;
   term: any;
   p: any;
   formFieldHelpers: string[] = [''];
   uploading: any;
-  uploadingdocs: any;
-  docs: any;
-  doc_title: any;
-  dsc: any;
-
   editing: any;
         //Upload 
         index: any;
@@ -57,8 +53,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     {      
             this.editing='N'
             this.uploading='N'
-            this.uploadingdocs='N'
-            this.docs='N'
             this._activatedRoute.data.subscribe(({ 
               data, menudata, userdata })=> { 
                 this.data=data;
@@ -95,21 +89,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.uploading='Y'
       }
     }
-    showUploadDocs() {
-      if (this.uploadingdocs=='Y') {
-        this.uploadingdocs='N'
-      } else {
-        this.uploadingdocs='Y'
-      }
-    }
-    showDocs() {
-      if (this.docs=='Y') {
-        this.docs='N'
-      } else {
-        this.docs='Y'
-      }
-    }
-
     ngOnDestroy(): void
     {
         // Unsubscribe from all subscriptions
@@ -250,9 +229,6 @@ export class UserProfileComponent implements OnInit, OnDestroy {
               formData.append('file', file, file.name);
               formData.append('company_id',this.data.id);
               formData.append('user_id',this.data.user.id);
-              formData.append('broker_id',this.data.user.broker_id);
-              formData.append('doc_title',this.doc_title);
-              formData.append('dsc',this.dsc);
               this.file_data=formData
               
             }else{
@@ -263,12 +239,12 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     
       }
     
-      ip="https://myna-docs.com/api/"
+      ip="https://deepgoat.com/data/"
       
       uploadFile()
         {
           console.log(this.file_data);
-          this.http.post(this.ip+'upload_profile.php',this.file_data)
+          this.http.post(this.ip+'upload_org_profile.php',this.file_data)
           .subscribe(res => {
             location.reload()
             console.log(res.toString)
@@ -277,18 +253,5 @@ export class UserProfileComponent implements OnInit, OnDestroy {
           alert('error occured')
         });
       }
-
-      uploadDocs()
-      {
-        console.log(this.file_data);
-        this.http.post(this.ip+'upload.php',this.file_data)
-        .subscribe(res => {
-          location.reload()
-          console.log(res.toString)
-        }, (err) => {
-        //send error response
-        alert('error occured')
-      });
-    }
 
 }

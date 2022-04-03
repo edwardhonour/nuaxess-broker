@@ -91,6 +91,7 @@ import { CommissionDashboardComponent } from './nuaxess/commission-dashboard/com
 import { BrokerListComponent } from './nuaxess/broker-list/broker-list.component';
 import { ProspectListComponent } from './nuaxess/prospect-list/prospect-list.component';
 import { ProspectDashboardComponent } from './nuaxess/prospect-dashboard/prospect-dashboard.component';
+import { OrgProfileComponent } from './nuaxess/org-profile/org-profile.component';
 
 const routerConfig: ExtraOptions = {
     preloadingStrategy       : PreloadAllModules,
@@ -143,7 +144,8 @@ const routerConfig: ExtraOptions = {
         CommissionDashboardComponent,
         BrokerListComponent,
         ProspectListComponent,
-        ProspectDashboardComponent
+        ProspectDashboardComponent,
+        OrgProfileComponent
     ],
     imports     : [
         BrowserModule,

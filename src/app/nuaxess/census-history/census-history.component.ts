@@ -359,6 +359,11 @@ editQuote() {
         });
         }
 
+        showInvoice(id: any, month_id: any) {
+          window.open(
+            "https://myna-api.com/api/pdf1.php?id="+id+"&display=B"+"&month_id="+this.data.month_id, "_blank");
+        }
+    
         showDoc(id: any) {
           window.open('https://myna-docs.com/?id='+id,'_new')
         }

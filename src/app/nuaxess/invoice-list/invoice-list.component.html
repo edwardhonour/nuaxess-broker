@@ -79,12 +79,7 @@
         <div class="flex-1 min-w-0">
             <div class="mt-2">
                 <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
-                    Invoice List <button style="margin-left:30px;" [routerLink]="['/add-invoice']" class="btn btn-primary">Add Invoice</button>
-                    <div *ngIf="data.id=='org'">Organization User Account List</div>
-                    <div *ngIf="data.id=='employer'">Company / Prospect User Account List</div>
-                    <div *ngIf="data.id=='pending'">Pending User Account List</div>
-                    <div *ngIf="data.id=='members'">Employee / Member User Account List</div>
-                    <div *ngIf="data.id=='nua'">NuAxess User Account List</div>
+                    Open Invoice List 
                 </h2>
             </div>
         </div>
@@ -100,40 +95,66 @@
                     <div class="col-lg-6 py-2">
                         Search: <input style="max-width:320px;" class="form-control" type="text" id="term" name="term" [(ngModel)]="term"> 
                     </div>
-                    <table class="table table-condensed">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Number</th>
-                                <th>Month/Year</th>
-                                <th>Company Name</th>
-                                <th>Address</th>
-                                <th>Email</th>
-                                <th>Grand Total</th>
-                                <th>Payment Date</th>
-                                <th>Employees</th>
-                                <th>Status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let m of data.list | filter: term | paginate: { currentPage: p , itemsPerPage: 25}" [ngStyle]="{'background-color':m.count === '0' ? '#FCE5EB' : '' }">
-                                <td>{{ m.id }}</td>
-                                <td>{{ m.invoice_number }}</td>
-                                <td>{{ m.month }}/{{ m.year }}</td>
-                                <td>{{ m.company_name }}</td>
-                                <td>{{ m.address }}</td>
-                                <td>{{ m.contact_email }}</td>
-                                <td>{{ m.grand_total }}</td>
-                                <td>{{ m.payment_dt }}</td>
-                                <td>{{ m.count }}</td>
-                                <td>{{ m.status }}</td>
-                                <td><button [routerLink]="['/invoice-dashboard',m.id]" class="btn btn-primary">View</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <paging-controls (pageChange)="p = $event" [isItemsPerPage]="false"  
-                    class="my-pagination"></paging-controls>
+                    <div class="card card-body" *ngFor="let m of data.list | filter: term "  style="margin-top:20px;">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <h2 style="font-size:18px;"><b>{{ m.id }}-{{ m.company_name }}</b></h2>
+                            </div>
+                            <div class="col-xl-2">
+                                <h2>{{ m.billing_contact_name }}</h2>
+                            </div>
+                            <div class="col-xl-2">
+                                <h2>{{ m.billing_contact_phone }}</h2>
+                            </div>
+                            <div class="col-xl-2">
+                                <h2>{{ m.billing_contact_email }}</h2>
+                            </div>
+                        </div>
+                        <div class="row" *ngIf="m.invoices.length>0">
+                            <div class="col-xl-12">
+                                <table class="table table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th>Invoice</th>
+                                            <th>Month/Year</th>
+                                            <th>Billing Date</th>
+                                            <th>Due Date</th>
+                                            <th style="text-align: right;">Medical Enrollment</th>
+                                            <th style="text-align: right;">Medical Total</th>
+                                            <th style="text-align: right;">Grand Total</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let n of m.invoices">
+                                            <td>{{ n.invoice_number }}</td>
+                                            <td>{{ n.month_id }}</td>
+                                            <td>{{ n.billing_date }}</td>
+                                            <td>{{ n.due_date }}</td>
+                                            <td style="text-align: right;">{{ n.medical_count }}</td>
+                                            <td style="text-align: right;">{{ n.medical_total }}</td>
+                                            <td style="text-align: right;">${{ n.grand_total }}</td>
+                                            <td style="text-align: right;"><button (click)="showInvoice(n.company_id,n.month_id);" class="btn">View / Download</button></td>
+                                            <td style="text-align: right;"><button [routerLink]="['/company-dashboard',n.company_id]" class="btn">Dashboard</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-6">
+                                    <h2 style="font-size:18px;"><b>Total Due: ${{ m.company_total }}</b></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="card card-body" style="margin-top:20px;">
+                        <div class="row">
+                            <div class="col-xl-6">
+                                <h2 style="font-size:18px;"><b>Grand Total: ${{ data.grand_total }}</b></h2>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

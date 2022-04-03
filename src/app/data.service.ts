@@ -17,6 +17,12 @@ export class DataService {
         this.url='https://myna-api.com/api/broker.php';
     }
 
+    postTemplate(file_data:any) {
+      console.log(file_data);
+      this.t=this.http.post('https://myna-docs.com/api/upload_quoting_template.php',file_data);
+      return this.t;
+    }
+    
   getLocalStorage() {
     //
     if (localStorage.getItem('uid')===null) {

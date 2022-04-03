@@ -200,6 +200,57 @@
                     </mat-form-field>
                 </div>
             </form>
+            <form class="flex flex-col mt-8 p-8 pb-4 bg-card rounded-2xl shadow overflow-hidden">
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="fuse-mat-textarea flex-auto">
+                    <mat-label>Address</mat-label>
+                    <input
+                        matInput
+                        matTextareaAutosize
+                        id="address" name="address" [(ngModel)]="data.formData['address']">
+                </mat-form-field>
+                </div>
+                <div class="flex flex-col gt-xs:flex-row">
+                    <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="fuse-mat-textarea flex-auto">
+                    <mat-label>City</mat-label>
+                    <input
+                        matInput
+                        matTextareaAutosize
+                        id="city" name="city" [(ngModel)]="data.formData['city']">
+                    </mat-form-field>
+                    <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="fuse-mat-textarea flex-auto">
+                    <mat-label>City</mat-label>
+                    <input
+                        matInput
+                        matTextareaAutosize
+                        id="state" name="state" [(ngModel)]="data.formData['state']">
+                    </mat-form-field>
+                    <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="fuse-mat-textarea flex-auto">
+                    <mat-label>State</mat-label>
+                    <input
+                        matInput
+                        matTextareaAutosize
+                        id="state" name="state" [(ngModel)]="data.formData['state']">
+                    </mat-form-field>
+                    <mat-form-field
+                    [ngClass]="formFieldHelpers"
+                    class="fuse-mat-textarea flex-auto">
+                    <mat-label>Zip</mat-label>
+                    <input
+                        matInput
+                        matTextareaAutosize
+                        id="zip" name="zip" [(ngModel)]="data.formData['zip']">
+                    </mat-form-field>
+                </div>
+            </form>
 
 
         </div>
@@ -209,15 +260,29 @@
                     <mat-form-field
                         [ngClass]="formFieldHelpers"
                         class="fuse-mat-textarea flex-auto">
+                        <mat-label>Billing Company</mat-label>
+                        <input
+                            matInput
+                            matTextareaAutosize
+                            id="billing_company_name" name="billing_company_name" [(ngModel)]="data.formData['billing_company_name']">
+                    </mat-form-field>
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
+                        <mat-label>Billing Contact</mat-label>
+                        <input
+                            matInput
+                            matTextareaAutosize
+                            id="billing_contact_name" name="billing_contact_name" [(ngModel)]="data.formData['billing_contact_name']">
+                    </mat-form-field>
+                    <mat-form-field
+                        [ngClass]="formFieldHelpers"
+                        class="fuse-mat-textarea flex-auto">
                         <mat-label>Address</mat-label>
                         <input
                             matInput
                             matTextareaAutosize
-                            id="address" name="address" [(ngModel)]="data.formData['address']">
-                        <mat-icon
-                            class="icon-size-5"
-                            matSuffix
-                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                            id="billing_address" name="billing_address" [(ngModel)]="data.formData['billing_address']">
                     </mat-form-field>
                 </div>
                 <div class="flex flex-col gt-md:flex-row">
@@ -225,21 +290,13 @@
                         [ngClass]="formFieldHelpers"
                         class="flex-auto gt-md:pr-3">
                         <mat-label>City</mat-label>
-                        <input matInput  id="city" name="city" [(ngModel)]="data.formData['city']">
-                        <mat-icon
-                            class="icon-size-5"
-                            matSuffix
-                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                        <input matInput  id="billing_city" name="billing_city" [(ngModel)]="data.formData['billing_city']">
                     </mat-form-field>
                     <mat-form-field
                         [ngClass]="formFieldHelpers"
                         class="flex-auto gt-md:pl-3">
                         <mat-label>State</mat-label>
-                        <input matInput  id="state" name="state" [(ngModel)]="data.formData['state']">
-                        <mat-icon
-                            class="icon-size-5"
-                            matSuffix
-                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
+                        <input matInput  id="billing_state" name="billing_state" [(ngModel)]="data.formData['billing_state']">
                     </mat-form-field>
                 </div>
                 <div class="flex">
@@ -251,11 +308,7 @@
                             matInput
                             maxlength="15"
                             #postalCode
-                            id="zip" name="zip" [(ngModel)]="data.formData['zip']">
-                        <mat-icon
-                            class="icon-size-5"
-                            matSuffix
-                            [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+                            id="billing_zip" name="billing_zip" [(ngModel)]="data.formData['billing_zip']">
                     </mat-form-field>
                 </div>
                 <div class="flex flex-col gt-md:flex-row">
@@ -264,10 +317,6 @@
                         class="flex-auto gt-md:pr-3">
                         <mat-label>Website</mat-label>
                         <input matInput  id="website" name="website" [(ngModel)]="data.formData['website']">
-                        <mat-icon
-                            class="icon-size-5"
-                            matSuffix
-                            [svgIcon]="'heroicons_solid:location-marker'"></mat-icon>
                     </mat-form-field>
                     <mat-form-field
                         [ngClass]="formFieldHelpers"

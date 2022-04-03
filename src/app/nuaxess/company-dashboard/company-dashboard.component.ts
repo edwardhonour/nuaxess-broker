@@ -22,6 +22,7 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
   isScreenSmall: boolean;
   term: any;
   p: any;
+  tuploading: any;
   formFieldHelpers: string[] = [''];
 
     data: any;
@@ -43,6 +44,11 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     inactive: any;
     active: any;
     history: any;
+    comp: any;
+    docs: any;
+    qplans: any;
+    aplans: any;
+    
     /**
      * Constructor
      */
@@ -66,15 +72,61 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     }
   }
   
+  showDocs() {
+    if (this.docs=='Y') {
+       this.docs='N';
+    } else {
+      this.docs='Y'
+    }
+  }
+
+  showQPlans() {
+    if (this.qplans=='Y') {
+       this.qplans='N';
+    } else {
+      this.qplans='Y'
+    }
+  }
+
+  showAPlans() {
+    if (this.aplans=='Y') {
+       this.aplans='N';
+    } else {
+      this.aplans='Y'
+    }
+  }
+
+  showComp() {
+    if (this.comp=='Y') {
+       this.comp='N';
+    } else {
+      this.comp='Y'
+    }
+  }
+
+  getProfile(id: any, status: any) {
+    if (status=="Enrolled"||status=="enrolled"||status=="enrolling") {
+      window.open(
+        "https://myna-docs.com/api/get_quote_template.php?id="+id);
+    }  else {
+      window.open(
+        "https://myna-docs.com/api/get_quote_template.php?id="+id);
+    }
+  }
     ngOnInit(): void
     {   
+      this.docs='N';
+      this.comp='N';
       this.dsc='';
+      this.qplans='N';
       this.doc_title="";   
       this.editQQ='N';
       this.uploading='N';
+      this.tuploading='N';
       this.inactive='N';
       this.active='N';
       this.history='N';
+      this.aplans='N';
       this._activatedRoute.data.subscribe(({ 
         data, menudata, userdata })=> { 
           this.data=data;
@@ -359,6 +411,13 @@ showActive() {
     this.active='Y'
   }
 }
+showTemplateUpload() {
+  if (this.tuploading=='Y') {
+    this.tuploading='N'
+  } else {
+    this.tuploading='Y'
+  }
+}
 
     postForm2() {
         this._dataService.postForm("post-add-level", this.data['formData2']).subscribe((data:any)=>{
@@ -406,7 +465,17 @@ showActive() {
       }
     
       ip="https://myna-docs.com/api/"
-      
+            
+      uploadTemplate() {
+        this._dataService.postTemplate(this.file_data).subscribe((data:any)=>{
+          if (data.error_code==0) {
+              console.log(data)
+              window.open(
+                "https://myna-docs.com/api/"+data.filename);
+          }
+        });   
+      }
+
       uploadFile()
         {
           console.log(this.file_data);

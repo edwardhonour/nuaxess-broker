@@ -46,6 +46,7 @@ import { CommissionListComponent } from './nuaxess/commission-list/commission-li
 import { CommissionDashboardComponent } from './nuaxess/commission-dashboard/commission-dashboard.component';
 import { ProspectListComponent } from './nuaxess/prospect-list/prospect-list.component';
 import { ProspectDashboardComponent } from './nuaxess/prospect-dashboard/prospect-dashboard.component';
+import { OrgProfileComponent } from './nuaxess/org-profile/org-profile.component';
 
 // @formatter:off
 /* eslint-disable max-len */
@@ -166,12 +167,15 @@ export const appRoutes: Route[] = [
             {path: 'current-terminations', component: CurrentTerminationsComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'current-terminations/:id', component: CurrentTerminationsComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'current-additions', component: CurrentAdditionsComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'additions-list', component: CurrentAdditionsComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'current-additions/:id', component: CurrentAdditionsComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
+            {path: 'additions-list/:id', component: CurrentAdditionsComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             //-- Alt Homes
             {path: 'broker-home', component: BrokerHomeComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             {path: 'badmin', component: AdminDashboardComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },
             //-- Enrollment
             {path: 'enroll/:id', component: UserEnrollComponent, resolve: { data: EnrollResolver }, },
+            {path: 'org-profile', component: OrgProfileComponent, resolve: { menudata: MenuResolver, data: DataResolver, userdata: UserResolver }, },           
             {path: 'enroll', component: UserEnrollComponent, resolve: { data: EnrollResolver }, }
         ]
     },

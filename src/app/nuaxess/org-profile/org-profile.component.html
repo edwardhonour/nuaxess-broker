@@ -88,12 +88,12 @@
         </svg>
         <!-- @formatter:on -->
         <div class="z-10 relative flex flex-col items-center" style="margin-top: 40px;">
-            <h2 class="text-xl font-semibold">User Profile</h2>
+            <h2 class="text-xl font-semibold">Organization Profile</h2>
             <div class="mt-1 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center">
-                {{ data.brokerData['last_name'] }}, {{ data.brokerData['first_name'] }} {{ data.brokerData['middle_name'] }}
+                {{ data.org_name }}
             </div>
             <div class="max-w-2xl mt-6 sm:text-2xl text-center tracking-tight text-secondary">
-                {{ data.brokerData['email'] }} - {{ data.brokerData['phone'] }}
+                {{ data.user['email'] }} - {{ data.user['phone_mobile'] }}
             </div>
         </div>
     </div>
@@ -129,16 +129,16 @@
                     <tbody>
                         <tr>
                             <th></th>
-                            <th>User Profile</th>
+                            <th>Organization Profile</th>
                         </tr>
                         <tr>
                             <th>ID:</th>
                             <td>{{ data.id }}</td>
                         </tr>
                         <tr>
-                            <th>Company Name:</th>
-                            <td *ngIf="editing=='N'">{{ data.company_name }}</td>
-                            <td *ngIf="editing=='Y'"><input class="form-control" [(ngModel)]="data.formData['company_name']" name="company_name" id="company_name"></td>
+                            <th>Organization Name:</th>
+                            <td *ngIf="editing=='N'">{{ data.org_name }}</td>
+                            <td *ngIf="editing=='Y'"><input class="form-control" [(ngModel)]="data.formData['org_name']" name="org_name" id="org_name"></td>
                         </tr>
                         <tr>
                             <th>Last Name:</th>
@@ -207,82 +207,10 @@
         </div>
         <div class="col-md-12 col-xl-5">
             <div class="row">
-                <div class="card card-body">
-                    <div *ngIf="uploading=='N'" class="row">
-                        <div class="col-12">
-                            <button class="btn btn-primary" (click)="showUpload()">Upload Avatar</button>
-                            <button style="margin-left: 20px;" class="btn btn-primary" (click)="showUploadDocs()">Upload Document</button>
-                        </div>
+                <div *ngIf="uploading=='N'" class="row">
+                    <div class="col-12">
+                        <button class="btn btn-primary" (click)="showUpload()">Upload Logo</button>
                     </div>
-                </div>
-                <div class="card card-body"  style="margin-top: 20px;">            
-                    <div class="row">
-                        <h2 style="font-size: 24px;"><b>Documents </b>
-                            <button *ngIf="docs=='N'" class="btn" (click)="showDocs()">Show ({{ data.docs.length }})</button>
-                            <button *ngIf="docs=='Y'" class="btn" (click)="showDocs()">Hide</button>             
-                        </h2>
-                        <div *ngIf="docs=='Y'">
-                    <div class="table table-responsive" *ngFor="let m of data.docs" >
-                        <thead>
-                            <tr>
-                                <th>Type</th>
-                                <th>{{ m.doc_title }}</th>
-                            </tr>        
-                     </thead>
-                        <tbody>
-                            <tr>
-                                <th>Timestamp</th>
-                                <td>{{ m.create_timestamp }}</td>
-                            </tr>   
-                            <tr>
-                                <th>Note</th>
-                                <td>{{ m.dsc }}</td>
-                            </tr> 
-                            <tr>
-                                <th></th>
-                                <th><button class="btn btn-warning" (click)="showDoc(m.key)">View</button></th>
-                            </tr> 
-                        </tbody>
-                    </div>
-                    </div>
-                    </div>
-                    <div *ngIf="uploadingdocs=='Y'"  class="card card-body">
-                        <h2 style="font-size: 24px;"><b>Select File to Upload</b></h2>
-                        <div class="row">
-                            <div class="col-xl-4"> &nbsp; </div>            
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-4">Document Type</div>
-                            <div class="col-xl-8">
-                            <select class="form-control" [(ngModel)]="doc_title" name="doc_title" id="doc_title">
-                                <option value="Referral Agreement">Referral Agreement</option>
-                                <option value="W9">W9</option>
-                                <option value="Direct Deposit">Direct Deposit Form</option>
-                                <option value="Other">Other</option>                   
-                            </select> 
-                        </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-4">Note/Description</div>
-                            <div class="col-xl-8">
-                            <input type="text" class="form-control" [(ngModel)]="dsc" name="dsc" id="dsc">
-                        </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-4"> &nbsp; </div>            
-                        </div>
-                        <div class="mc">
-                            <input [formControl]="file" (change)="fileChange(index,$event)" type="file" placeholder="File">
-                            <br>
-                            <button style="margin-top:20px" (click)="showUploadDocs()" mat-raised-button color="default">
-                                Cancel
-                            </button>
-                            <button style="margin-top:20px; margin-left:20px;" (click)="uploadDocs()" mat-raised-button color="primary">
-                                Upload
-                            </button>
-                        </div>
-                        </div>
-                
                 </div>
                 <div *ngIf="uploading=='Y'"  class="card card-body">
                     <h2 style="font-size: 24px;"><b>Select Images to Upload</b></h2>
