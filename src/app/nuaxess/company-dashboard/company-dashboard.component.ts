@@ -48,7 +48,9 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     docs: any;
     qplans: any;
     aplans: any;
-    
+    editPayments: any;
+    payments: any;
+
     /**
      * Constructor
      */
@@ -78,6 +80,33 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
     } else {
       this.docs='Y'
     }
+  }
+
+  showPayments() {
+    if (this.payments=='Y') {
+       this.payments='N';
+    } else {
+      this.payments='Y'
+    }
+  }
+
+  showBad(m: any) {
+    m.move="Y";
+   }
+
+  unShowBad(m: any) {
+    m.move="N";
+   }
+
+  postBad(id: any) {
+    this.data['badData']['employee_id']=id;
+    this._dataService.postForm("post-census-bad", this.data['badData']).subscribe((data:any)=>{
+      if (data.error_code=="0") {
+        location.reload();
+      } else {     
+  //            this.error=data.error_message
+      }
+    });
   }
 
   showQPlans() {
@@ -127,6 +156,8 @@ export class CompanyDashboardComponent implements OnInit, OnDestroy {
       this.active='N';
       this.history='N';
       this.aplans='N';
+      this.editPayments='N';
+      this.payments='N';
       this._activatedRoute.data.subscribe(({ 
         data, menudata, userdata })=> { 
           this.data=data;

@@ -73,6 +73,10 @@ export class EditCompanyComponent implements OnInit {
         this._unsubscribeAll.complete();
     }
 
+    showBad(m: any) {
+      m.move="Y";
+     }
+     
     trackByFn(index: number, item: any): any
     {
         return item.id || index;

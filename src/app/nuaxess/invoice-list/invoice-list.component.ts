@@ -135,7 +135,7 @@ export class InvoiceListComponent implements OnInit, OnDestroy {
 
     showInvoice(id: any, month_id: any) {
       window.open(
-        "https://myna-api.com/api/pdf1.php?id="+id+"&display=B"+"&month_id="+this.data.month_id, "_blank");
+        "https://myna-api.com/api/pdf1.php?id="+id+"&display=B"+"&month_id="+month_id, "_blank");
     }
 
     postForm() {
